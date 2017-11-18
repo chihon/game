@@ -1,0 +1,161 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Cube Pixel Wood Square 2
+  m_Shader: {fileID: 4800000, guid: 57a6def46230d124ea80fb4b4a75c1a2, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 5
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BlendMask:
+        m_Texture: {fileID: 2800000, guid: 608f4d03086defc45ab715ae81d7ce1c, type: 3}
+        m_Scale: {x: 0.5, y: 0.5}
+        m_Offset: {x: 0.27, y: 0.24}
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Diffuse1:
+        m_Texture: {fileID: 2800000, guid: 82697303ddbef64418eed16b4e3b29f9, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Diffuse2:
+        m_Texture: {fileID: 2800000, guid: a2ace50392a0b6c419863e271d1c3844, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DiffuseMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DiffuseMap1:
+        m_Texture: {fileID: 2800000, guid: 82697303ddbef64418eed16b4e3b29f9, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DiffuseMap1SpecA:
+        m_Texture: {fileID: 2800000, guid: 82697303ddbef64418eed16b4e3b29f9, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DiffuseMap2:
+        m_Texture: {fileID: 2800000, guid: a2ace50392a0b6c419863e271d1c3844, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DiffuseMap2SpecA:
+        m_Texture: {fileID: 2800000, guid: a2ace50392a0b6c419863e271d1c3844, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: 82697303ddbef64418eed16b4e3b29f9, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NormalMap1:
+        m_Texture: {fileID: 2800000, guid: ad64969f3be20514ebe59f970fe9aa7a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NormalMap2:
+        m_Texture: {fileID: 2800000, guid: 485e7fe3be0ace04e8c80c68f89f0063, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - __BlendMask:
+        m_Texture: {fileID: 2800000, guid: 608f4d03086defc45ab715ae81d7ce1c, type: 3}
+        m_Scale: {x: 0.5, y: 0.5}
+        m_Offset: {x: 0.26, y: 0.19}
+    - __NormalMap1:
+        m_Texture: {fileID: 2800000, guid: ad64969f3be20514ebe59f970fe9aa7a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - __NormalMap2:
+        m_Texture: {fileID: 2800000, guid: 485e7fe3be0ace04e8c80c68f89f0063, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _node_1096:
+        m_Texture: {fileID: 2800000, guid: ad64969f3be20514ebe59f970fe9aa7a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _node_6189:
+        m_Texture: {fileID: 2800000, guid: 485e7fe3be0ace04e8c80c68f89f0063, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _BlendIntensity: 0
+    - _Blendexpension: 0.644
+    - _BumpScale: 1
+    - _Cutoff: 0.5
+    - _DetailNormalMapScale: 1
+    - _DstBlend: 0
+    - _Emissive: 0.46
+    - _Glossiness: 0.6
+    - _Mask: 0
+    - _MaskBlur: 1
+    - _MaskExpand: 0.644
+    - _MaskIntensity: 1
+    - _Metallic: 0
+    - _Mode: 0
+    - _NormalIntensity1: 1
+    - _NormalIntensity2: 1
+    - _OcclusionStrength: 1
+    - _Parallax: 0.02
+    - _Pixelsize: 2
+    - _SpecularIntensity: 1
+    - _SrcBlend: 1
+    - _U: 7
+    - _UPixelsize: 43
+    - _UVSec: 0
+    - _U_copy: 0.7
+    - _V: 3
+    - _VPixelsize: 8
+    - _ZWrite: 1
+    - _node_3856: 10
+    - _node_4452: 192
+    - _node_7271: 0.721
+    - _node_7271_copy: 0
+    m_Colors:
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _ColorDiffuse: {r: 1, g: 0.9837728, b: 0.9632353, a: 1}
+    - _ColorDiffuse1: {r: 1, g: 1, b: 1, a: 1}
+    - _ColorDiffuse2: {r: 1, g: 1, b: 1, a: 1}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _PixelColor1: {r: 0.9485294, g: 0.9485294, b: 0.9485294, a: 1}
+    - _PixelColor2: {r: 0.29411763, g: 0.29411763, b: 0.29411763, a: 1}
+    - _SpecularColor: {r: 1, g: 0, b: 0, a: 1}
+    - __ColorDiffuse1: {r: 1, g: 1, b: 1, a: 1}
+    - __ColorDiffuse2: {r: 1, g: 1, b: 1, a: 1}
+    - __SpecularColor: {r: 1, g: 1, b: 1, a: 1}
