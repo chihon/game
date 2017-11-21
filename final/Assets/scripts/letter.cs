@@ -6,6 +6,10 @@ public class letter : MonoBehaviour
 {
     private float rotatespeed = 5f;
 
+    public string word;
+
+    private ball_collect_alphabet bca;
+
     // Use this for initialization
     void Start()
     {
@@ -20,10 +24,11 @@ public class letter : MonoBehaviour
     }
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "player")
+        if (other.gameObject.name == "Player")
         {
+            bca = other.gameObject.GetComponent<ball_collect_alphabet>();
+            bca.SetAlphabetChar(word);
             Destroy(gameObject);
-         
         }
     }
 }

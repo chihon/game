@@ -84,6 +84,13 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\AbilityLock.cs" />
+    <Compile Include="Assets\PlayerControl.cs" />
+    <Compile Include="Assets\scripts\Ability.cs" />
+    <Compile Include="Assets\scripts\AbilityUnlock.cs" />
+    <Compile Include="Assets\scripts\alphabet.cs" />
+    <Compile Include="Assets\scripts\ball_collect_alphabet.cs" />
+    <Compile Include="Assets\scripts\Flash.cs" />
     <Compile Include="Assets\scripts\letter.cs" />
   </ItemGroup>
   <ItemGroup>

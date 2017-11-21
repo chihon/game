@@ -123,13 +123,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="final.Plugins.csproj">
-      <Project>{335F133E-9442-459E-F82D-D6D79FD20CEB}</Project>
-      <Name>final.Plugins</Name>
-    </ProjectReference>
     <ProjectReference Include="final.csproj">
       <Project>{BA94A93B-5208-2668-2218-191D9190B69E}</Project>
       <Name>final</Name>
+    </ProjectReference>
+    <ProjectReference Include="final.Plugins.csproj">
+      <Project>{335F133E-9442-459E-F82D-D6D79FD20CEB}</Project>
+      <Name>final.Plugins</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

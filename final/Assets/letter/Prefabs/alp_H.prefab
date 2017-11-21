@@ -10,6 +10,8 @@ GameObject:
   - component: {fileID: 476948}
   - component: {fileID: 3313894}
   - component: {fileID: 2354010}
+  - component: {fileID: 114817191962461368}
+  - component: {fileID: 65098360743898400}
   m_Layer: 0
   m_Name: alp_H
   m_TagString: Untagged
@@ -24,7 +26,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 150476}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.46, y: 0.059, z: 0.54}
+  m_LocalPosition: {x: 45, y: 10.99, z: 38.86}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_Children: []
   m_Father: {fileID: 0}
@@ -41,7 +43,7 @@ MeshRenderer:
   m_ReceiveShadows: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
+  m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 2100000, guid: 6480e0d130013403dabccd0ba75fcdab, type: 2}
   m_StaticBatchInfo:
@@ -80,3 +82,27 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 150476}
   m_IsPrefabParent: 1
+--- !u!65 &65098360743898400
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 150476}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.002830957, y: 0.0047488115, z: 0.0009200001}
+  m_Center: {x: -0.0014154785, y: 0.0023744057, z: 0}
+--- !u!114 &114817191962461368
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 150476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef5b1ddf95de22742a16955e01e3795d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  word: H

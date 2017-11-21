@@ -18,7 +18,7 @@ public class alphabet : MonoBehaviour {
 	void OnCollisionEnter(Collision coll) {
 		if (coll.gameObject.name == "Cube") {
 			bca = coll.gameObject.GetComponent<ball_collect_alphabet> ();
-			bca.alphabetChar = word;
+			bca.SetAlphabetChar(word);
 			Destroy (gameObject);
 		}
 	}
