@@ -14,6 +14,9 @@ public class ball_collect_alphabet : MonoBehaviour {
     public string abilityButtonAxisName = "Fire1";
     public Image darkMask;
     public Text lockText;
+	public Rigidbody Flashshell;
+	public Transform firefrom;
+	public float FireOffset;
 
     private Image myButtonImage;
     private bool abilityLock;
@@ -41,6 +44,15 @@ public class ball_collect_alphabet : MonoBehaviour {
                 UnLock();
                 GUI.color = Color.blue;
 				GUIButtonRet = GUI.Button (new Rect (X, Y, width, height), s);
+				if (Input.GetKeyDown (KeyCode.F)) {
+					print ("fire is clicked");
+					for (int j = 0; j < allStrs [i].Count; j++) {
+						charCount [allStrs [i] [j]] = 1;
+					}
+					//do effects
+					myEffect(allStrs[i]);
+				
+				}
 				if (GUIButtonRet) {
 					print (s + " is clicked");
 					for (int j = 0; j < allStrs [i].Count; j++) {
@@ -70,8 +82,13 @@ public class ball_collect_alphabet : MonoBehaviour {
 
 	void myEffect(List<string> code) {
 		if (listStringIdentical (code, new List<string> { "F", "L", "A", "S","H" })) {
-            //bm.rb.AddForce (bm.jumpForceVec * 10.0f, ForceMode.Impulse);
-            UnLock();
+			UnLock();
+			//bm.rb.AddForce (bm.jumpForceVec * 10.0f, ForceMode.Impulse);
+			Vector3 FireOffset2 = new Vector3(0, 1f, 0);
+			Vector3 firebegin = firefrom.forward * FireOffset + FireOffset2;
+			Rigidbody newshell = Instantiate (Flashshell, firefrom.position + firebegin, Quaternion.Euler (firefrom.forward)) as Rigidbody;
+			print ("Flash done");
+          
         }
 	}
 	
