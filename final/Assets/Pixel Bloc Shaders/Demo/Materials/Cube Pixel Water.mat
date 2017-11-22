@@ -180,7 +180,7 @@ Material:
     - _x: 0.54
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _ColorDiffuse: {r: 0.38830018, g: 0.8196172, b: 0.83823526, a: 1}
+    - _ColorDiffuse: {r: 0.83823526, g: 0.38830018, b: 0.5837891, a: 1}
     - _ColorDiffuse1: {r: 1, g: 1, b: 1, a: 1}
     - _ColorDiffuse2: {r: 1, g: 1, b: 1, a: 1}
     - _ColorTint: {r: 0.5923443, g: 0.829725, b: 0.9705882, a: 1}
