@@ -76,6 +76,9 @@
     <Reference Include="UnityEngine.HoloLens">
       <HintPath>Library\UnityAssemblies\UnityEngine.HoloLens.dll</HintPath>
     </Reference>
+    <Reference Include="Facebook.Unity.Settings">
+      <HintPath>Library\FacebookSDK\Facebook.Unity.Settings.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="final.Plugins.csproj">
@@ -92,6 +95,10 @@
     <Compile Include="Assets\scripts\ball_collect_alphabet.cs" />
     <Compile Include="Assets\scripts\Flash.cs" />
     <Compile Include="Assets\scripts\letter.cs" />
+    <Compile Include="Assets\scripts\particleAttractorLinear.cs" />
+    <Compile Include="Assets\scripts\particleAttractorMove.cs" />
+    <Compile Include="Assets\scripts\spawn.cs" />
+    <Compile Include="Assets\TinyFire VFX\LightControl.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Pixel Bloc Shaders\Pixel Color.shader" />
