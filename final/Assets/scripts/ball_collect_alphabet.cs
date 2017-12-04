@@ -14,14 +14,15 @@ public class ball_collect_alphabet : MonoBehaviour {
     public string abilityButtonAxisName = "Fire1";
     public Image darkMask;
     public Text lockText;
-	public Rigidbody Flashshell;
-	public Transform firefrom;
-	public float FireOffset;
 
     private Image myButtonImage;
     private bool abilityLock;
     private float nextReadyTime;
     private float coolDownTimeLeft;
+	//Mage atk
+	private MageATKManager MageATK;
+	private WarrATKManager WarrATK;
+	private GunATKManager GunATK;
 
     // Use this for initialization
     void Start () {
@@ -30,6 +31,9 @@ public class ball_collect_alphabet : MonoBehaviour {
 		allStrs = new List< List<string> >();
 		allStrs.Add (new List<string> { "F","L","A","S","H" });
         allStrs.Add(new List<string> { "F", "I", "R", "E"});
+		MageATK = GetComponent<MageATKManager> ();
+		//WarrATK = GetComponent<WarrATKManager> ();
+		//GunATK = GetComponent <GunATKManager> ();
     }
 
     void OnGUI () {
@@ -44,15 +48,7 @@ public class ball_collect_alphabet : MonoBehaviour {
                 UnLock();
                 GUI.color = Color.blue;
 				GUIButtonRet = GUI.Button (new Rect (X, Y, width, height), s);
-				if (Input.GetKeyDown (KeyCode.F)) {
-					print ("fire is clicked");
-					for (int j = 0; j < allStrs [i].Count; j++) {
-						charCount [allStrs [i] [j]] = 1;
-					}
-					//do effects
-					myEffect(allStrs[i]);
-				
-				}
+
 				if (GUIButtonRet) {
 					print (s + " is clicked");
 					for (int j = 0; j < allStrs [i].Count; j++) {
@@ -84,9 +80,8 @@ public class ball_collect_alphabet : MonoBehaviour {
 		if (listStringIdentical (code, new List<string> { "F", "L", "A", "S","H" })) {
 			UnLock();
 			//bm.rb.AddForce (bm.jumpForceVec * 10.0f, ForceMode.Impulse);
-			Vector3 FireOffset2 = new Vector3(0, 1f, 0);
-			Vector3 firebegin = firefrom.forward * FireOffset + FireOffset2;
-			Rigidbody newshell = Instantiate (Flashshell, firefrom.position + firebegin, Quaternion.Euler (firefrom.forward)) as Rigidbody;
+
+
 			print ("Flash done");
           
         }
@@ -94,6 +89,37 @@ public class ball_collect_alphabet : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if (Input.GetKeyDown (KeyCode.Alpha1)) {
+			print ("fire is clicked");
+			MageATK.ATK1 ();
+			//WarrATK.ATK1 ();
+			//GunATK.ATK1 ();
+			myEffect(new List<string> { "F", "L", "A", "S","H" });
+
+		}
+		if (Input.GetKeyDown (KeyCode.Alpha2)) {
+			print ("wind is clicked");
+			MageATK.ATK2 ();
+			//WarrATK.ATK2 ();
+			//GunATK.ATK2 ();
+			myEffect(new List<string> { "F", "L", "A", "S","H" });
+
+		}if (Input.GetKeyDown (KeyCode.Alpha3)) {
+			print ("Ice is clicked");
+			MageATK.ATK3 ();
+			//WarrATK.ATK3 ();
+			//GunATK.ATK3 ();
+			myEffect(new List<string> { "F", "L", "A", "S","H" });
+
+		}
+		if (Input.GetKeyDown (KeyCode.Alpha4)) {
+			print ("flash is clicked");
+			MageATK.ATK4 ();
+			//WarrATK.ATK4 ();
+			//GunATK.ATK4 ();
+			myEffect(new List<string> { "F", "L", "A", "S","H" });
+
+		}
 		alphabetCharCopy = alphabetChar;
 		if (alphabetCharCopy != "") {
 			alphabetChar = "";
