@@ -18,12 +18,12 @@ public class WarrATKManager : MonoBehaviour {
 	// Use this for initialization
 	// Use this for initialization
 	void Start () {
-		
+		m_FireRotat = Camera.main.transform;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
+		m_FireRotat = Camera.main.transform;
 	}
 	//Sword ATK
 	public void ATK1 (){
