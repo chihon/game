@@ -32,8 +32,8 @@ public class ball_collect_alphabet : MonoBehaviour {
 		allStrs.Add (new List<string> { "F","L","A","S","H" });
         allStrs.Add(new List<string> { "F", "I", "R", "E"});
 		MageATK = GetComponent<MageATKManager> ();
-		//WarrATK = GetComponent<WarrATKManager> ();
-		//GunATK = GetComponent <GunATKManager> ();
+		WarrATK = GetComponent<WarrATKManager> ();
+		GunATK = GetComponent <GunATKManager> ();
     }
 
     void OnGUI () {
@@ -91,20 +91,59 @@ public class ball_collect_alphabet : MonoBehaviour {
 	void Update () {
 		if (Input.GetKeyDown (KeyCode.Alpha1)) {
 			print ("fire is clicked");
+			//MageATK.ATK1 ();
+			//WarrATK.ATK1 ();
+			GunATK.ATK1 ();
+			myEffect(new List<string> { "F", "L", "A", "S","H" });
+
+		}
+		if (Input.GetKeyDown (KeyCode.Alpha2)) {
+			print ("wind is clicked");
+			//MageATK.ATK2 ();
+			//WarrATK.ATK2 ();
+			GunATK.ATK2 ();
+			myEffect(new List<string> { "F", "L", "A", "S","H" });
+
+		}if (Input.GetKeyDown (KeyCode.Alpha3)) {
+			print ("Ice is clicked");
+			//MageATK.ATK3 ();
+			//WarrATK.ATK3 ();
+			GunATK.ATK3 ();
+			myEffect(new List<string> { "F", "L", "A", "S","H" });
+
+		}
+		if (Input.GetKeyDown (KeyCode.Alpha4)) {
+			print ("flash is clicked");
+			//MageATK.ATK4 ();
+			//WarrATK.ATK4 ();
+			GunATK.ATK4 ();
+			myEffect(new List<string> { "F", "L", "A", "S","H" });
+
+		}
+		alphabetCharCopy = alphabetChar;
+		if (alphabetCharCopy != "") {
+			alphabetChar = "";
+			if (!charCount.ContainsKey (alphabetCharCopy)) {
+				charCount.Add (alphabetCharCopy, 0);
+			}
+			charCount[alphabetCharCopy] += 1;
+		}
+		if (Input.GetKeyDown (KeyCode.V)) {
+			print ("fire is clicked");
 			MageATK.ATK1 ();
 			//WarrATK.ATK1 ();
 			//GunATK.ATK1 ();
 			myEffect(new List<string> { "F", "L", "A", "S","H" });
 
 		}
-		if (Input.GetKeyDown (KeyCode.Alpha2)) {
+		if (Input.GetKeyDown (KeyCode.B)) {
 			print ("wind is clicked");
 			MageATK.ATK2 ();
 			//WarrATK.ATK2 ();
 			//GunATK.ATK2 ();
 			myEffect(new List<string> { "F", "L", "A", "S","H" });
 
-		}if (Input.GetKeyDown (KeyCode.Alpha3)) {
+		}if (Input.GetKeyDown (KeyCode.N)) {
 			print ("Ice is clicked");
 			MageATK.ATK3 ();
 			//WarrATK.ATK3 ();
@@ -112,11 +151,89 @@ public class ball_collect_alphabet : MonoBehaviour {
 			myEffect(new List<string> { "F", "L", "A", "S","H" });
 
 		}
-		if (Input.GetKeyDown (KeyCode.Alpha4)) {
+		if (Input.GetKeyDown (KeyCode.M)) {
 			print ("flash is clicked");
 			MageATK.ATK4 ();
 			//WarrATK.ATK4 ();
 			//GunATK.ATK4 ();
+			myEffect(new List<string> { "F", "L", "A", "S","H" });
+
+		}
+		alphabetCharCopy = alphabetChar;
+		if (alphabetCharCopy != "") {
+			alphabetChar = "";
+			if (!charCount.ContainsKey (alphabetCharCopy)) {
+				charCount.Add (alphabetCharCopy, 0);
+			}
+			charCount[alphabetCharCopy] += 1;
+		}
+		if (Input.GetKeyDown (KeyCode.G)) {
+			print ("fire is clicked");
+			//MageATK.ATK1 ();
+			WarrATK.ATK1 ();
+			//GunATK.ATK1 ();
+			myEffect(new List<string> { "F", "L", "A", "S","H" });
+
+		}
+		if (Input.GetKeyDown (KeyCode.H)) {
+			print ("wind is clicked");
+			//MageATK.ATK2 ();
+			WarrATK.ATK2 ();
+			//GunATK.ATK2 ();
+			myEffect(new List<string> { "F", "L", "A", "S","H" });
+
+		}if (Input.GetKeyDown (KeyCode.J)) {
+			print ("Ice is clicked");
+			//MageATK.ATK3 ();
+			WarrATK.ATK3 ();
+			//GunATK.ATK3 ();
+			myEffect(new List<string> { "F", "L", "A", "S","H" });
+
+		}
+		if (Input.GetKeyDown (KeyCode.K)) {
+			print ("flash is clicked");
+			//MageATK.ATK4 ();
+			WarrATK.ATK4 ();
+			//GunATK.ATK4 ();
+			myEffect(new List<string> { "F", "L", "A", "S","H" });
+
+		}
+		alphabetCharCopy = alphabetChar;
+		if (alphabetCharCopy != "") {
+			alphabetChar = "";
+			if (!charCount.ContainsKey (alphabetCharCopy)) {
+				charCount.Add (alphabetCharCopy, 0);
+			}
+			charCount[alphabetCharCopy] += 1;
+		}
+		if (Input.GetKeyDown (KeyCode.Y)) {
+			print ("fire is clicked");
+			//MageATK.ATK1 ();
+			//WarrATK.ATK1 ();
+			GunATK.ATK1 ();
+			myEffect(new List<string> { "F", "L", "A", "S","H" });
+
+		}
+		if (Input.GetKeyDown (KeyCode.U)) {
+			print ("wind is clicked");
+			//MageATK.ATK2 ();
+			//WarrATK.ATK2 ();
+			GunATK.ATK2 ();
+			myEffect(new List<string> { "F", "L", "A", "S","H" });
+
+		}if (Input.GetKeyDown (KeyCode.I)) {
+			print ("Ice is clicked");
+			//MageATK.ATK3 ();
+			//WarrATK.ATK3 ();
+			GunATK.ATK3 ();
+			myEffect(new List<string> { "F", "L", "A", "S","H" });
+
+		}
+		if (Input.GetKeyDown (KeyCode.O)) {
+			print ("flash is clicked");
+			//MageATK.ATK4 ();
+			//WarrATK.ATK4 ();
+			GunATK.ATK4 ();
 			myEffect(new List<string> { "F", "L", "A", "S","H" });
 
 		}

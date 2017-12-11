@@ -39,6 +39,7 @@ public class GunATKManager : MonoBehaviour {
 			Instantiate (m_GunShell, m_FireFrom.position, m_FireRotat.rotation);
 		//GameObject RitualInstance = 
 		//	Instantiate (m_GunRitual, m_Ritual.position, Quaternion.identity);
+		shellInstance.transform.Rotate(90, 0, 0);
 		shellInstance.velocity = m_FireRotat.forward * m_GunSpeed;
 	}
 	//Pistol ATK
@@ -49,7 +50,9 @@ public class GunATKManager : MonoBehaviour {
 		newPlace.y += 1;
 		GameObject RitualInstance = 
 			Instantiate (m_PistolRitual, newPlace, m_FireRotat.rotation);
+		shellInstance.transform.Rotate(90, 0, 0);
 		shellInstance.velocity = m_FireRotat.forward * m_PistolSpeed;
+		RitualInstance.transform.Rotate (90, 0, 0);
 	}
 	//Grenade ATK
 	public void ATK3 (){

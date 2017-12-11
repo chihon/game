@@ -2,28 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EffectTime : MonoBehaviour {
+public class PistolBulletEff : MonoBehaviour {
 	public float BulletLifeTime;
 	//Flag for Destroy the object or not on Collision 
-	private bool D;
+	public GameObject m_BulletExplode;
 	// Use this for initialization
 	void Start () {
 		Destroy (gameObject, BulletLifeTime);
-		D = true;
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
 	}
 
-	public void DestroyByCollision(bool Des)	{
-		D = Des;
+	// Update is called once per frame
+	void Update () {
+
 	}
 
 	void OnCollisionEnter(Collision Other){
-		if (D) {
-			Destroy(gameObject);
-		}
+		GameObject ExplodeInstance = 
+			Instantiate (m_BulletExplode, this.transform.position, Quaternion.identity);
+		Destroy(gameObject);
 	}
 }
