@@ -9,6 +9,7 @@ GameObject:
   m_Component:
   - component: {fileID: 446910}
   - component: {fileID: 19816976}
+  - component: {fileID: 114094947769114978}
   - component: {fileID: 19959572}
   m_Layer: 0
   m_Name: Ingredient-BattleGear-Arrow-Arrow5
@@ -3357,7 +3358,7 @@ ParticleSystemRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 0
-  m_SelectedEditorRenderState: 3
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -3394,3 +3395,15 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 190946}
   m_IsPrefabParent: 1
+--- !u!114 &114094947769114978
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 190946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc723103685a8400bb8110782261d8e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BulletLifeTime: 0
