@@ -214,6 +214,8 @@ GameObject:
   - component: {fileID: 143672672033314878}
   - component: {fileID: 95079276448340726}
   - component: {fileID: 114724401495391632}
+  - component: {fileID: 114054913692120544}
+  - component: {fileID: 114034714983510042}
   m_Layer: 0
   m_Name: Soldier_1
   m_TagString: Untagged
@@ -948,7 +950,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 140708}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.4160962, y: 2.67, z: 5.2240744}
+  m_LocalPosition: {x: 9.407761, y: 1.01, z: 40.68252}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 488978}
@@ -2102,7 +2104,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1150576568342020}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: -0.7071068, w: 0}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children:
@@ -2116,7 +2118,7 @@ Transform:
   - {fileID: 4973010620642612}
   m_Father: {fileID: 4379116932371938}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 90, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!4 &4379116932371938
 Transform:
   m_ObjectHideFlags: 1
@@ -2538,6 +2540,33 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114034714983510042
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 140708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abdee58ba9cc0ec42ba85620af1dc53e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sensitivity: 4
+  smoothing: 2
+--- !u!114 &114054913692120544
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 140708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 545491a7577e413488d16b21838591fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 3
+  jumpForce: 7
+  gravity: 20
 --- !u!114 &114666709230624806
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2645,7 +2674,6 @@ MonoBehaviour:
     Attack1: 111
     Attack2: 112
     Dash: 108
-    Event: 101
 --- !u!143 &143672672033314878
 CharacterController:
   m_ObjectHideFlags: 1
