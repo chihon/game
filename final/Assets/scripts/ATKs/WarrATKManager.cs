@@ -16,9 +16,16 @@ public class WarrATKManager : MonoBehaviour {
 	public Transform m_Ritual;
 	public Transform m_FireRotat;
 	// Use this for initialization
-	// Use this for initialization
+	
+	public List<List<string>> abilityList;
+    public int maxLength;
 	void Start () {
-		
+		abilityList = new List<List<string>>();
+        abilityList.Add(new List<string> { "S", "W", "O", "R", "D" });
+        abilityList.Add(new List<string> { "R", "U", "S", "H" });
+        abilityList.Add(new List<string> { "S", "H", "E", "I", "L", "D" });
+        abilityList.Add(new List<string> { "W", "A", "R", "W", "I", "N", "G" });
+        maxLength = 7;
 	}
 	
 	// Update is called once per frame

@@ -24,9 +24,17 @@ public class GunATKManager : MonoBehaviour {
 	public Transform m_FireFrom;
 	public Transform m_Ritual;
 	public Transform m_FireRotat;
+
+	public List<List<string>> abilityList;
+	public int maxLength;
 	// Use this for initialization
 	void Start () {
-
+        abilityList = new List<List<string>>();
+        abilityList.Add(new List<string> { "G","U","N" });
+        abilityList.Add(new List<string> { "P","I","S","T","O","L" });
+        abilityList.Add(new List<string> { "G","R","E","N","A","D","E" });
+        abilityList.Add(new List<string> { "S","A","T","E","L","L","I","T","E" });
+        maxLength = 9;
 	}
 
 	// Update is called once per frame

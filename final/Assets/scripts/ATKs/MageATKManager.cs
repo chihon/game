@@ -19,14 +19,21 @@ public class MageATKManager : MonoBehaviour {
 	public float m_FlashSpeed;
 	public GameObject m_FlashRitual;
 
-
-
 	public Transform m_FireFrom;
 	public Transform m_Ritual;
 	public Transform m_FireRotat;
+
+	
+    public List<string> abilityList;
+    public int maxLength;
 	// Use this for initialization
 	void Start () {
-		
+		abilityList = new List<string>();
+        abilityList.Add("FIRE");
+        abilityList.Add("WIND");
+        abilityList.Add("ICE");
+        abilityList.Add("FLASH");
+        maxLength = 5;
 	}
 	
 	// Update is called once per frame
