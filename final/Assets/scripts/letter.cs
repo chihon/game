@@ -24,7 +24,7 @@ public class letter : MonoBehaviour
     }
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.name == "Player")
+        if (other.gameObject.tag == "player")
         {
             bca = other.gameObject.GetComponent<ball_collect_alphabet>();
             bca.SetAlphabetChar(word);
