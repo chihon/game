@@ -423,12 +423,16 @@
             {
                 return;
             }
-            Vector3 v = Camera.main.transform.up * dir.y + Camera.main.transform.forward * dir.y + Camera.main.transform.right * dir.x;
+            /*Vector3 v = Camera.main.transform.up * dir.y + Camera.main.transform.forward * dir.y + Camera.main.transform.right * dir.x;
             v.y = 0f;
             v.Normalize();
             v *= speed;
             AimVelocity.x = v.x;
-            AimVelocity.z = v.z;
+            AimVelocity.z = v.z;*/
+            //Vector3 v = Vector3.ClampMagnitude(dir, 1f) * speed;
+            Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+            AimVelocity.x = movement.x;
+            AimVelocity.z = movement.z;
         }
 
 
@@ -487,7 +491,7 @@
         /// <param name="q">Rotate quaternion in world space</param>
         public void Rotate(Quaternion q)
         {
-            Vector3 v = q.eulerAngles;
+            /*Vector3 v = q.eulerAngles;
             transform.rotation = Quaternion.Euler(0f, v.y, 0f);
             if (AniDash)
             {
@@ -495,7 +499,7 @@
                 AimVelocity.x = dash.x;
                 AimVelocity.z = dash.z;
                 return;
-            }
+            }*/
         }
 
 

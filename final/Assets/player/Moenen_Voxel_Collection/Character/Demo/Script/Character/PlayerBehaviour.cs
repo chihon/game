@@ -18,29 +18,28 @@
         public struct PlayerInputKey
         {
 
-            //public KeyCode Forward;
-            //public KeyCode Back;
-            //public KeyCode Left;
-            //public KeyCode Right;
-            //public KeyCode Jump;
-            //public KeyCode RunWalk;
+            public KeyCode Forward;
+            public KeyCode Back;
+            public KeyCode Left;
+            public KeyCode Right;
+            public KeyCode Jump;
+            public KeyCode RunWalk;
             public KeyCode Attack1;
             public KeyCode Attack2;
-            //public KeyCode Dash;
+            public KeyCode Dash;
 
 
             public void Reset()
             {
-                //Forward = KeyCode.W;
-                //Back = KeyCode.S;
-                //Left = KeyCode.A;
-                //Right = KeyCode.D;
-                //Jump = KeyCode.Space;
-                //RunWalk = KeyCode.R;
+                Forward = KeyCode.W;
+                Back = KeyCode.S;
+                Left = KeyCode.A;
+                Right = KeyCode.D;
+                Jump = KeyCode.Space;
+                RunWalk = KeyCode.R;
                 Attack1 = KeyCode.Mouse0;
-                //Attack1 = KeyCode.1;
                 Attack2 = KeyCode.Mouse1;
-                //Dash = KeyCode.L;
+                Dash = KeyCode.L;
             }
 
         }
@@ -80,20 +79,20 @@
         protected override void Update()
         {
 
-            //MovementUpdate();
+            MovementUpdate();
 
-            //JumpUpdate();
+            JumpUpdate();
 
             AttackUpdate();
 
-            //DashUpdate();
+            DashUpdate();
 
-            //base.Update();
+            base.Update();
 
         }
 
 
-        /*
+
         void MovementUpdate()
         {
 
@@ -183,14 +182,18 @@
 
             base.RunDependCamera(AimMove);
 
+            /*if (AimMove != Vector2.zero) {
+                AimRotation = Quaternion.Lerp(AimRotation, Quaternion.Euler(
+                    0f, (AimMove.x > 0f ? 1f : -1f) * Vector2.Angle(Vector2.up, AimMove) + 180f, 0f
+                ), RotateRant);
+            }*/
 
 
             base.RotateDependCamera(AimRotation);
 
         }
-        */
 
-        /*
+
         void JumpUpdate()
         {
             if (Input.GetKeyDown(inputKey.Jump))
@@ -198,7 +201,6 @@
                 base.Jump();
             }
         }
-        */
 
 
         void AttackUpdate()
@@ -213,7 +215,7 @@
             }
         }
 
-        /*
+
         void DashUpdate()
         {
             if (Input.GetKeyDown(inputKey.Dash))
@@ -221,7 +223,7 @@
                 base.Dash();
             }
         }
-        */
+
 
         #endregion
 

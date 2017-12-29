@@ -244,9 +244,14 @@ GameObject:
   - component: {fileID: 95418413098049570}
   - component: {fileID: 143616032290766568}
   - component: {fileID: 114975395608746996}
+  - component: {fileID: 54413980039507614}
+  - component: {fileID: 114002617069639606}
+  - component: {fileID: 114446427194578360}
+  - component: {fileID: 114225304357661888}
+  - component: {fileID: 114834839301858562}
   m_Layer: 0
   m_Name: Killer
-  m_TagString: Untagged
+  m_TagString: player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -923,8 +928,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 140708}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.656147, y: 0.1, z: 3.4248083}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -1.61}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_Children:
   - {fileID: 488978}
   m_Father: {fileID: 0}
@@ -1956,13 +1961,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1311962626860442}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_Children: []
   m_Father: {fileID: 4018931197840484}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!23 &23626275063861302
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -2002,6 +2007,21 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1311962626860442}
   m_Mesh: {fileID: 4300000, guid: d2622bea3a06ec14c9b7867065be02f8, type: 3}
+--- !u!54 &54413980039507614
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 140708}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!95 &95418413098049570
 Animator:
   serializedVersion: 3
@@ -2019,6 +2039,52 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114002617069639606
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 140708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc5282fe470b1c94fb3ead99b6036d12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  abilityButtonAxisName: Fire1
+  darkMask: {fileID: 0}
+  lockText: {fileID: 0}
+--- !u!114 &114225304357661888
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 140708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 545491a7577e413488d16b21838591fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 3
+  jumpForce: 7
+  gravity: 20
+--- !u!114 &114446427194578360
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 140708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4bbec2c51a9842c7acca2dcc7b6d4be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SwordRitual: {fileID: 0}
+  m_RushRitual: {fileID: 0}
+  m_ShieldRitual: {fileID: 0}
+  m_WarwingRitual: {fileID: 0}
+  m_FireFrom: {fileID: 0}
+  m_Ritual: {fileID: 0}
+  m_FireRotat: {fileID: 0}
 --- !u!114 &114452861527001730
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2040,6 +2106,19 @@ MonoBehaviour:
     attackSpeed1: 23
     attackSpeed2: 29
     attackRange: 24
+--- !u!114 &114834839301858562
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 140708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abdee58ba9cc0ec42ba85620af1dc53e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sensitivity: 4
+  smoothing: 2
 --- !u!114 &114975395608746996
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2126,7 +2205,6 @@ MonoBehaviour:
     Attack1: 111
     Attack2: 112
     Dash: 108
-    Event: 101
 --- !u!143 &143616032290766568
 CharacterController:
   m_ObjectHideFlags: 1
