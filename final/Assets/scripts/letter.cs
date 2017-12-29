@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class letter : MonoBehaviour
+public class letter : NetworkBehaviour
 {
     private float rotatespeed = 5f;
 
@@ -24,6 +25,10 @@ public class letter : MonoBehaviour
     }
     void OnTriggerEnter(Collider other)
     {
+        if (!isServer)
+        {
+            return;
+        }
         if (other.gameObject.tag == "player")
         {
             bca = other.gameObject.GetComponent<ball_collect_alphabet>();

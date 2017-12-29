@@ -10,7 +10,8 @@ public class ball_collect_alphabet : MonoBehaviour {
 	private string alphabetCharCopy; // to avoid race condiciton
 
 	private Dictionary<string, int> charCount;
-	private List<string> allStrs;
+    //public Dictionary<string, int> charCount;
+    private List<string> allStrs;
 
     public string abilityButtonAxisName = "Fire1";
     public Image darkMask;
@@ -22,6 +23,8 @@ public class ball_collect_alphabet : MonoBehaviour {
     private float coolDownTimeLeft;
     private List<Sprite[]> currentTexture;
     List<string> spriteList;
+
+
     //Sprite[] sprites;
     //Mage atk
     private MageATKManager MageATK;
@@ -160,6 +163,14 @@ public class ball_collect_alphabet : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        string data = "";
+        foreach (string key in charCount.Keys)
+        {
+            int val = charCount[key];
+            data += (key + " = " + val + ",");
+        }
+        Debug.Log(data);
+
         bool isChanged = false;
         alphabetCharCopy = alphabetChar;
         if (alphabetCharCopy != "")

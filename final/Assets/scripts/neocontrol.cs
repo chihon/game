@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class neocontrol : MonoBehaviour {
+public class neocontrol : NetworkBehaviour {
 
     public float speed = 3.0F;
     public float jumpForce = 7.0F;
@@ -20,7 +21,10 @@ public class neocontrol : MonoBehaviour {
     }
     void Update()
     {
-
+        if (!isLocalPlayer)
+        {
+            return;
+        }
         CharacterController controller = GetComponent<CharacterController>();
         if (controller.isGrounded)
         {

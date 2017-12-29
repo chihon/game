@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2349482}
   - component: {fileID: 114311592510459022}
   - component: {fileID: 65261455069488150}
+  - component: {fileID: 114759701340942584}
   m_Layer: 0
   m_Name: alp_L
   m_TagString: Untagged
@@ -41,6 +42,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 0
@@ -56,6 +58,7 @@ MeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -106,3 +109,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   word: L
+--- !u!114 &114759701340942584
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 181676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 3
+    i1: 213
+    i2: 41
+    i3: 61
+    i4: 201
+    i5: 218
+    i6: 244
+    i7: 237
+    i8: 56
+    i9: 36
+    i10: 28
+    i11: 147
+    i12: 92
+    i13: 67
+    i14: 49
+    i15: 43
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
