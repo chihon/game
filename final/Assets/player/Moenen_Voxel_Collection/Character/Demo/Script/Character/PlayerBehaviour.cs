@@ -3,7 +3,7 @@
 
     using UnityEngine;
     using System.Collections;
-
+    using UnityEngine.Networking;
 
     [DisallowMultipleComponent]
     public sealed class PlayerBehaviour : CharacterBehaviour
@@ -78,7 +78,7 @@
 
         protected override void Update()
         {
-
+            if (!isLocalPlayer) {return; }
             MovementUpdate();
 
             JumpUpdate();

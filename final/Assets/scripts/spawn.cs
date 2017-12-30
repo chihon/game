@@ -13,6 +13,8 @@ public class spawn : NetworkBehaviour {
     //public float spawnLesatWait;
     public bool stop;
 
+    private int LetterLimit = 20; // modify this only in script and set as private, in order to be applied to the whole game.
+
 
     int randletter;
     // Use this for initialization
@@ -44,14 +46,20 @@ public class spawn : NetworkBehaviour {
 
     void createLetter()
     {
-        randletter = Random.Range(0, 5);
+        if (GameObject.FindGameObjectsWithTag("letter").Length >= LetterLimit)
+        {
+            //Debug.Log("won't spawn beyond LetterLimit " + LetterLimit.ToString());
+            return;
+        }
+
+        randletter = Random.Range(0, letters.Length);
         Vector3 spawnPosition = new Vector3(Random.Range(-spawnValues.x, spawnValues.x), 1, Random.Range(-spawnValues.z, spawnValues.z));
         GameObject letter = (GameObject)Instantiate(letters[randletter], spawnPosition + transform.TransformPoint(0, 0, 0), gameObject.transform.rotation);
         NetworkServer.Spawn(letter);
     }
 
 
-
+    /*
     IEnumerator Spawner()
     {
         yield return new WaitForSeconds(startWait);
@@ -70,6 +78,7 @@ public class spawn : NetworkBehaviour {
             yield return new WaitForSeconds(spawnWait);
         }
     }
+    */
 
     /*
     [ClientRpc]

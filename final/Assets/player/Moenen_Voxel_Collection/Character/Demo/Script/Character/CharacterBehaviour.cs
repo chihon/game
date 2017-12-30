@@ -3,12 +3,13 @@
 
     using UnityEngine;
     using System.Collections;
+    using UnityEngine.Networking;
 
 
     [RequireComponent(typeof(Animator))]
     [RequireComponent(typeof(CharacterController))]
     [DisallowMultipleComponent]
-    public class CharacterBehaviour : MonoBehaviour
+    public class CharacterBehaviour : NetworkBehaviour
     {
 
 

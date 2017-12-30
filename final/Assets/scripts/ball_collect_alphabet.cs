@@ -3,13 +3,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 
-public class ball_collect_alphabet : MonoBehaviour {
-	//public UnityEngine.UI.Text msg;
-	private string alphabetChar;
+public class ball_collect_alphabet : NetworkBehaviour {
+    //public UnityEngine.UI.Text msg;
+
+    
+    private string alphabetChar;
 	private string alphabetCharCopy; // to avoid race condiciton
 
+    [SyncVar]
+    public string dictionarySerializedSync;
+
 	private Dictionary<string, int> charCount;
+
     //public Dictionary<string, int> charCount;
     private List<string> allStrs;
 
@@ -24,6 +31,9 @@ public class ball_collect_alphabet : MonoBehaviour {
     private List<Sprite[]> currentTexture;
     List<string> spriteList;
 
+    public int forceUIUpdateIntervalLength = 30; // force update UI every interval
+    private int UIUpdateCountdown;
+
 
     //Sprite[] sprites;
     //Mage atk
@@ -33,20 +43,33 @@ public class ball_collect_alphabet : MonoBehaviour {
     private Texture tempTexture;
     private int maxWeight;
 
+    private List<bool> skillAvalible;
+
+
+    static private string[] StrICE = { "I", "C", "E" };
+    static private string[] StrFLASH = { "F", "L", "A", "S", "H" };
+    static private string[] StrFIRE = { "F", "I", "R", "E" };
+    static private string[] StrWIND = { "W", "I", "N", "D" };
+
+    // FUNCION START
+    // ========================================================================================================
+
     // Use this for initialization
-    void Start () {
-		alphabetChar = "";
-		charCount = new Dictionary<string, int>();
+    void Start()
+    {
+        UIUpdateCountdown = forceUIUpdateIntervalLength;
+        alphabetChar = "";
+        charCount = new Dictionary<string, int>();
         allStrs = new List<string>();
         currentTexture = new List<Sprite[]>();
-        
-        MageATK = GetComponent<MageATKManager> ();
+
+        MageATK = GetComponent<MageATKManager>();
         allStrs = MageATK.abilityList;
         maxWeight = MageATK.maxLength;
         currentTexture = emptySpriteList(maxWeight);
         //Debug.Log("CurrentTexture: " + currentTexture.Count);
         //sprites  = Resources.LoadAll<Sprite>("AlphaList");
-        
+
         /**
         foreach (Sprite s in sprites)
         {
@@ -54,18 +77,28 @@ public class ball_collect_alphabet : MonoBehaviour {
             //Debug.Log(s.name + " : " + spriteList.IndexOf(s.name));
         }
         **/
-       // Debug.Log("AllStrs's Count: " + allStrs.Count);
-       /**
-        for (int i = 0; i < allStrs.Count; i++)
-        {
-            //Debug.Log("AllStrs[" + i + "]: " + allStrs[i]);
-            currentTexture.Add(getMappingImage(allStrs[i], maxWeight));
-            //Debug.Log("CT Lengthe: " + currentTexture[i].Length);
-        }
-        **/
+        // Debug.Log("AllStrs's Count: " + allStrs.Count);
+        /**
+         * 
+         * 
+         for (int i = 0; i < allStrs.Count; i++)
+         {
+             //Debug.Log("AllStrs[" + i + "]: " + allStrs[i]);
+             currentTexture.Add(getMappingImage(allStrs[i], maxWeight));
+             //Debug.Log("CT Lengthe: " + currentTexture[i].Length);
+         }
+         **/
         GameObject go = GameObject.Find("AbilityPanel");
         Image[] sr = go.GetComponentsInChildren<Image>();
         sr[0].sprite = CreateNewAbilitySprite();
+
+        skillAvalible = new List<bool>();
+
+        //foreach(Sprite[] s in currentTexture)
+        for (int i = 0; i < currentTexture.Count; i++)
+        {
+            skillAvalible.Add(false);
+        }
     }
 
     private List<Sprite[]> emptySpriteList(int maxWeight)
@@ -156,69 +189,148 @@ public class ball_collect_alphabet : MonoBehaviour {
 
 	void myEffect(List<string> code) {
 		if (listStringIdentical (code, new List<string> { "F", "L", "A", "S","H" })) {
-			//bm.rb.AddForce (bm.jumpForceVec * 10.0f, ForceMode.Impulse);
 			print ("Flash done");
         }
 	}
-	
-	// Update is called once per frame
-	void Update () {
+
+    string DictionaryToStr(Dictionary<string, int> dict)
+    {
         string data = "";
-        foreach (string key in charCount.Keys)
+        foreach (string key in dict.Keys)
         {
-            int val = charCount[key];
-            data += (key + " = " + val + ",");
+            int val = dict[key];
+            data += (key + "," + val.ToString() + "|");
         }
-        Debug.Log(data);
+        return data;
+    }
+    Dictionary<string, int> StrToDictionary(string str)
+    {
+        Dictionary<string, int> result = new Dictionary<string, int> { };
+        string[] pairs = str.Split('|');
 
-        bool isChanged = false;
-        alphabetCharCopy = alphabetChar;
-        if (alphabetCharCopy != "")
+        foreach (string pair in pairs)
         {
-            //這邊紀錄目前字母數量 && 加上是否有被改變的 flag
-            alphabetChar = "";
-            if (!charCount.ContainsKey(alphabetCharCopy))
+            if (pair == "")
+                continue; // ignore last split
+            string[] Columns = pair.Split(',');
+            if (Columns.Length < 2)
             {
-                charCount.Add(alphabetCharCopy, 1);
-                isChanged = true;
-            }
-            if (charCount.ContainsKey(alphabetCharCopy))
+                Debug.Log("Bad String " + str + " in StrToDicionary");
+                return result;
+            } else
             {
-                charCount[alphabetCharCopy] += 1;
-                isChanged = true;
-            }   
-        }
-        if (isChanged) { 
-            currentTexture = new List<Sprite[]>(allStrs.Count);
-            //Debug.Log("Allstrs: " + allStrs.Count);
-            for (int i = 0; i < allStrs.Count; i++)
-            {
-                //Debug.Log("i: " +i + " : " + allStrs.Count);
-                if (checkString(allStrs[i]))
+                string key = Columns[0];
+                int cnt = int.Parse(Columns[1]);
+                if (!result.ContainsKey(key))
                 {
-                    currentTexture.Add(getMappingImage(allStrs[i], maxWeight));
-                }
-                else
+                    result.Add(key, cnt);
+                } else
                 {
-                    currentTexture.Add(getMappingImage("", maxWeight));
+                    result[key] = cnt;
+                    Debug.Log("Duplicate entries, bad string " + str + " in StrToDicionary");
                 }
             }
-            GameObject go = GameObject.Find("AbilityPanel");
-            Image[] sr = go.GetComponentsInChildren<Image>();
-            sr[0].sprite = CreateNewAbilitySprite();
+        }
+        return result;
+    }
+
+
+    void serializeDictionary()
+    {
+        dictionarySerializedSync = DictionaryToStr(charCount);
+    }
+    void unserializeDictionary()
+    {
+        charCount = StrToDictionary(dictionarySerializedSync);
+    }
+
+    [ClientRpc]
+    void RpcUnserializeDictionary()
+    {
+        unserializeDictionary();
+    }
+
+    // Update is called once per frame
+
+    bool collectAlphabetUpdate()
+    {
+        if (isLocalPlayer)
+        {
+            //Debug.Log("isLocalPlayer=" + dictionarySerializedSync);
+        }
+        else
+        {
+            //Debug.Log("notLocalPlayer=" + dictionarySerializedSync);
         }
 
-        List<bool> skillAvalible = new List<bool>();
+        if (isServer)
+        {
+            // server code
+            serializeDictionary();
+            bool isChanged = false;
+            alphabetCharCopy = alphabetChar;
+            if (alphabetCharCopy != "")
+            {
+                //這邊紀錄目前字母數量 && 加上是否有被改變的 flag
+                alphabetChar = "";
+                if (!charCount.ContainsKey(alphabetCharCopy))
+                {
+                    charCount.Add(alphabetCharCopy, 0); // initilization
+                    isChanged = true;
+                }
+                if (charCount.ContainsKey(alphabetCharCopy))
+                {
+                    charCount[alphabetCharCopy] += 1;
+                    isChanged = true;
+                }
+            }
+            return isChanged;
+
+        } else
+        {
+            string prevDictSerialized = DictionaryToStr(charCount);
+            unserializeDictionary();
+            string currDictSerialized = DictionaryToStr(charCount);
+
+            Debug.Log(currDictSerialized != prevDictSerialized);
+            return (currDictSerialized != prevDictSerialized);
+        }
+    }
+    void skillUIUpdate()
+    {
+        if (!isLocalPlayer)
+        {
+            return;
+        }
+
+        currentTexture = new List<Sprite[]>(allStrs.Count);
+        for (int i = 0; i < allStrs.Count; i++)
+        {
+            if (checkString(allStrs[i]))
+            {
+                currentTexture.Add(getMappingImage(allStrs[i], maxWeight));
+            }
+            else
+            {
+                currentTexture.Add(getMappingImage("", maxWeight));
+            }
+        }
+        GameObject go = GameObject.Find("AbilityPanel");
+        Image[] sr = go.GetComponentsInChildren<Image>();
+        sr[0].sprite = CreateNewAbilitySprite();
+
+        skillAvalible = new List<bool>();
 
         //foreach(Sprite[] s in currentTexture)
         for (int i = 0; i < currentTexture.Count; i++)
         {
             int counter = 0;
-            for (int j = 0; j < currentTexture[i].Length; j++) {
+            for (int j = 0; j < currentTexture[i].Length; j++)
+            {
                 //Debug.Log("Cur skill word: " + currentTexture[i][j].name + " : " + counter);
                 if (currentTexture[i][j].name != "NULL")
                 {
-                   counter++;
+                    counter++;
                 }
             }
             if (counter == allStrs[i].Length)
@@ -231,23 +343,163 @@ public class ball_collect_alphabet : MonoBehaviour {
             }
             //Debug.Log("Skill: " + i + " : " + skillAvalible[i]);
         }
-            
-        if (skillAvalible[0] && Input.GetKeyDown (KeyCode.Alpha1)) {
-			print ("fire is clicked");
-			MageATK.ATK1 ();
-		}
-		if (skillAvalible[1] && Input.GetKeyDown (KeyCode.Alpha2)) {
-			print ("wind is clicked");
-			MageATK.ATK2 ();
-		}
-        if (skillAvalible[2] && Input.GetKeyDown (KeyCode.Alpha3)) {
-			print ("Ice is clicked");
-			MageATK.ATK3 ();
-		}
-		if (skillAvalible[3] && Input.GetKeyDown (KeyCode.Alpha4)) {
-			print ("flash is clicked");
-			MageATK.ATK4 ();
-		}
+
+        //string skillAvalibleStr = "";
+        //for (int i = 0; i < currentTexture.Count; i++)
+        //{
+        //    if (skillAvalible[i])
+        //    {
+        //        skillAvalibleStr += i.ToString();
+        //    }
+        //}
+        //Debug.Log(skillAvalibleStr);
+    }
+
+    [ClientRpc]
+    void RpcSkillUIUpdate()
+    {
+        skillUIUpdate();
+    }
+
+
+    void useSkill ()
+    {
+        if (skillAvalible[0] && Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            print("fire is clicked");
+            CmdUseSkill(StrFIRE);
+        }
+        if (skillAvalible[1] && Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            print("wind is clicked");
+            CmdUseSkill(StrWIND);
+        }
+        if (skillAvalible[2] && Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            print("Ice is clicked");
+            CmdUseSkill(StrICE);
+        }
+        if (skillAvalible[3] && Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            Debug.Log("flash is clicked");
+            CmdUseSkill(StrFLASH);
+        }
+    }
+
+    [Command]
+    void CmdUseSkill(string [] skill)
+    {
+        ServerUseSkill(skill);
+    }
+
+    [ClientRpc]
+    void RpcRemoveString(string[] skill)
+    {
+        foreach (string alphabet in skill)
+        {
+            if (charCount.ContainsKey(alphabet))
+            {
+                charCount[alphabet] -= 1;
+                if (charCount[alphabet] < 0)
+                {
+                    charCount[alphabet] = 0;
+                    Debug.Log("Bad Command, charCount[" + alphabet + "] < 0");
+                }
+                if (charCount[alphabet] <= 0)
+                {
+                    charCount.Remove(alphabet);
+                }
+            }
+            else
+            {
+                Debug.Log("Bad Command, no such key " + alphabet);
+            }
+        }
+    }
+
+    static bool stringArrayEqual(string [] a, string [] b)
+    {
+        if (a.Length != b.Length)
+        {
+            return false;
+        }
+        for (int i = 0; i < a.Length; i++)
+        {
+            if (a[i] != b[i])
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    void ServerUseSkill(string [] skill)
+    {
+        // server help check skill
+        if (!isServer)
+        {
+            return;
+        } else
+        {
+            bool goodCmd = true;
+            foreach (string alphabet in skill)
+            {
+                if (charCount.ContainsKey(alphabet))
+                {
+                    charCount[alphabet] -= 1;
+                    if (charCount[alphabet] < 0)
+                    {
+                        charCount[alphabet] = 0;
+                        Debug.Log("Bad Command, charCount[" + alphabet + "] < 0");
+                        goodCmd = false;
+                    }
+                    if (charCount[alphabet] <= 0)
+                    {
+                        charCount.Remove(alphabet);
+                    }
+                }
+                else
+                {
+                    Debug.Log("Bad Command, no such key " + alphabet);
+                    goodCmd = false;
+                }
+            }
+            if (goodCmd)
+            {
+                if (stringArrayEqual(skill,StrFIRE))
+                {
+                    MageATK.RpcATK1();
+                    Debug.Log("FIRE");
+                } else if (stringArrayEqual(skill, StrWIND))
+                {
+                    MageATK.RpcATK2();
+                    Debug.Log("WIND");
+                } else if (stringArrayEqual(skill, StrICE))
+                {
+                    MageATK.RpcATK3();
+                    Debug.Log("ICE");
+                } else if (stringArrayEqual(skill, StrFLASH))
+                {
+                    MageATK.RpcATK4();
+                    Debug.Log("FLASH");
+                }
+            }
+        }
+
+    }
+
+    void Update () {
+        UIUpdateCountdown--;
+        bool isChanged = collectAlphabetUpdate();
+        if (isChanged || UIUpdateCountdown <= 0)
+        {
+            UIUpdateCountdown = forceUIUpdateIntervalLength;
+            skillUIUpdate();
+        }
+        if (isLocalPlayer)
+        {
+            useSkill();
+        }
     }
 
 	string charsToString (List<string> chars) {

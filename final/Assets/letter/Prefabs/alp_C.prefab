@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 114066138871623560}
   m_Layer: 0
   m_Name: alp_C
-  m_TagString: Untagged
+  m_TagString: letter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -140,4 +140,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef5b1ddf95de22742a16955e01e3795d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  word: 
+  word: C
