@@ -67,27 +67,20 @@ public class ball_collect_alphabet : NetworkBehaviour {
         allStrs = MageATK.abilityList;
         maxWeight = MageATK.maxLength;
         currentTexture = emptySpriteList(maxWeight);
-        //Debug.Log("CurrentTexture: " + currentTexture.Count);
-        //sprites  = Resources.LoadAll<Sprite>("AlphaList");
 
-        /**
-        foreach (Sprite s in sprites)
+        for(int i = 0; i < allStrs.Count; i++)
         {
-            spriteList.Add(s.name);
-            //Debug.Log(s.name + " : " + spriteList.IndexOf(s.name));
+            for(int j = 0; j < allStrs[i].Length; j++)
+            {
+                string currChar = allStrs[i][j].ToString();
+                if (!charCount.ContainsKey(currChar))
+                {
+                    charCount.Add(currChar, 0);
+                    Debug.Log("Word Add To Dic: " + currChar);
+                }
+            }
         }
-        **/
-        // Debug.Log("AllStrs's Count: " + allStrs.Count);
-        /**
-         * 
-         * 
-         for (int i = 0; i < allStrs.Count; i++)
-         {
-             //Debug.Log("AllStrs[" + i + "]: " + allStrs[i]);
-             currentTexture.Add(getMappingImage(allStrs[i], maxWeight));
-             //Debug.Log("CT Lengthe: " + currentTexture[i].Length);
-         }
-         **/
+
         GameObject go = GameObject.Find("AbilityPanel");
         Image[] sr = go.GetComponentsInChildren<Image>();
         sr[0].sprite = CreateNewAbilitySprite();
@@ -111,38 +104,7 @@ public class ball_collect_alphabet : NetworkBehaviour {
         }
         return emptySpriteList;
     }
-
-    /**
-    void OnGUI () {
-		int height = 40;
-		int width = 100;
-		int X = 1500;
-		int Y = 750;
-//        GUI.DrawTexture(new Rect(0.0f, 0.0f, tempTexture.width, tempTexture.height), tempTexture);
-        GameObject go = GameObject.Find("AbilityPanel");
-        Image[] sr = go.GetComponentsInChildren<Image>();
-        for (int i = 0; i < allStrs.Count; i++) {
-            bool GUIButtonRet;
-			if (checkString(allStrs[i])) {
-                //Debug.Log(" Current Length: " + currentTexture.ToString());
-                //原先是用來 查看按鈕是否被按: 這塊要取代掉，改成在按下攻擊按鈕的地方去扣掉
-				if (GUIButtonRet) {
-					print (s + " is clicked");
-					for (int j = 0; j < allStrs [i].Count; j++) {
-						charCount [allStrs [i] [j]] -= 1;
-					}
-					//do effects
-					myEffect(allStrs[i]);
-                }
-                } else {
-				//GUI.color = Color.black;
-				//GUIButtonRet = GUI.Button (new Rect (X, Y, width, height), allStrs[i]);
-               //              sr[0].sprite = s;
-            }
-			Y += height;
-		}
-	}
-    **/
+    
 
     Sprite[] getMappingImage(string input, int maxLength)
     {
@@ -153,7 +115,7 @@ public class ball_collect_alphabet : NetworkBehaviour {
         {
             // Debug.Log("Input: " + input[i]);
             //contentArray[i] = sprites[ spriteList.IndexOf(input[i].ToString())];
-            contentArray[i] = Resources.Load<Sprite>("alpha/"+input[i].ToString());
+            contentArray[i] = Resources.Load<Sprite>("alpha2/"+input[i].ToString());
             //Debug.Log(contentArray[i].name + " w: " + contentArray[i].rect.width + " h: " + contentArray[i].rect.height);
         }
         //Debug.Log("ContentArray before length: " + contentArray.Length);
@@ -162,7 +124,7 @@ public class ball_collect_alphabet : NetworkBehaviour {
             for(int i = input.Length; i < maxLength; i++)
             {
                 //contentArray[i] = sprites[17];
-                contentArray[i] =  Resources.Load<Sprite>("alpha/NULL");
+                contentArray[i] =  Resources.Load<Sprite>("alpha2/0");
             }
         }
         }
@@ -273,16 +235,8 @@ public class ball_collect_alphabet : NetworkBehaviour {
             {
                 //這邊紀錄目前字母數量 && 加上是否有被改變的 flag
                 alphabetChar = "";
-                if (!charCount.ContainsKey(alphabetCharCopy))
-                {
-                    charCount.Add(alphabetCharCopy, 0); // initilization
-                    isChanged = true;
-                }
-                if (charCount.ContainsKey(alphabetCharCopy))
-                {
-                    charCount[alphabetCharCopy] += 1;
-                    isChanged = true;
-                }
+                charCount[alphabetCharCopy] += 1;
+                isChanged = true;
             }
             return isChanged;
 
@@ -292,10 +246,35 @@ public class ball_collect_alphabet : NetworkBehaviour {
             unserializeDictionary();
             string currDictSerialized = DictionaryToStr(charCount);
 
-            Debug.Log(currDictSerialized != prevDictSerialized);
+            //Debug.Log(currDictSerialized != prevDictSerialized);
             return (currDictSerialized != prevDictSerialized);
         }
     }
+
+    string CheckCurrSkillWordCount(string currSkill)
+    {
+        string output = "";
+        for(int i = 0; i < currSkill.Length; i++)
+        {
+        string currChar = currSkill[i].ToString();
+        try { 
+            if (charCount[currChar] > 0)
+            {
+                output += currChar;
+            }
+            else
+            {
+                output += "0";
+            }
+        }catch(Exception e)
+        {
+            Debug.Log("CurrChar in catch: " + currChar);
+            Debug.Log(e.StackTrace);
+        }
+        }
+        return output;
+    }
+
     void skillUIUpdate()
     {
         if (!isLocalPlayer)
@@ -306,14 +285,7 @@ public class ball_collect_alphabet : NetworkBehaviour {
         currentTexture = new List<Sprite[]>(allStrs.Count);
         for (int i = 0; i < allStrs.Count; i++)
         {
-            if (checkString(allStrs[i]))
-            {
-                currentTexture.Add(getMappingImage(allStrs[i], maxWeight));
-            }
-            else
-            {
-                currentTexture.Add(getMappingImage("", maxWeight));
-            }
+                currentTexture.Add(getMappingImage(CheckCurrSkillWordCount(allStrs[i]), maxWeight));
         }
         GameObject go = GameObject.Find("AbilityPanel");
         Image[] sr = go.GetComponentsInChildren<Image>();
@@ -328,7 +300,7 @@ public class ball_collect_alphabet : NetworkBehaviour {
             for (int j = 0; j < currentTexture[i].Length; j++)
             {
                 //Debug.Log("Cur skill word: " + currentTexture[i][j].name + " : " + counter);
-                if (currentTexture[i][j].name != "NULL")
+                if (currentTexture[i][j].name != "0")
                 {
                     counter++;
                 }
@@ -366,22 +338,22 @@ public class ball_collect_alphabet : NetworkBehaviour {
     {
         if (skillAvalible[0] && Input.GetKeyDown(KeyCode.Alpha1))
         {
-            print("fire is clicked");
+            //print("fire is clicked");
             CmdUseSkill(StrFIRE);
         }
         if (skillAvalible[1] && Input.GetKeyDown(KeyCode.Alpha2))
         {
-            print("wind is clicked");
+            //print("wind is clicked");
             CmdUseSkill(StrWIND);
         }
         if (skillAvalible[2] && Input.GetKeyDown(KeyCode.Alpha3))
         {
-            print("Ice is clicked");
+            //print("Ice is clicked");
             CmdUseSkill(StrICE);
         }
         if (skillAvalible[3] && Input.GetKeyDown(KeyCode.Alpha4))
         {
-            Debug.Log("flash is clicked");
+            //Debug.Log("flash is clicked");
             CmdUseSkill(StrFLASH);
         }
     }
@@ -404,10 +376,6 @@ public class ball_collect_alphabet : NetworkBehaviour {
                 {
                     charCount[alphabet] = 0;
                     Debug.Log("Bad Command, charCount[" + alphabet + "] < 0");
-                }
-                if (charCount[alphabet] <= 0)
-                {
-                    charCount.Remove(alphabet);
                 }
             }
             else
@@ -452,10 +420,6 @@ public class ball_collect_alphabet : NetworkBehaviour {
                         charCount[alphabet] = 0;
                         Debug.Log("Bad Command, charCount[" + alphabet + "] < 0");
                         goodCmd = false;
-                    }
-                    if (charCount[alphabet] <= 0)
-                    {
-                        charCount.Remove(alphabet);
                     }
                 }
                 else
@@ -554,7 +518,7 @@ public class ball_collect_alphabet : NetworkBehaviour {
     public Sprite CreateNewAbilitySprite()
     {
         //Debug.Log("CT[0].Length: " + currentTexture[0].Length + "CTC: " + currentTexture.Count);
-        Texture2D newSkillIcon = new Texture2D(282 * currentTexture[0].Length, 213 * currentTexture.Count, TextureFormat.ARGB32, false);
+        Texture2D newSkillIcon = new Texture2D(64 * currentTexture[0].Length, 64 * currentTexture.Count, TextureFormat.ARGB32, false);
         int h = 0;
         foreach (Sprite[] texture in currentTexture)
         {
@@ -566,9 +530,9 @@ public class ball_collect_alphabet : NetworkBehaviour {
                 Color32[] tempTexture = texture[k].texture.GetPixels32();
                 //newSkillIcon.SetPixels32(w, h, (int)texture[k].rect.width+1, (int)texture[k].rect.height+1, tempTexture);
                 newSkillIcon.SetPixels32(w, h, (int)texture[k].rect.width, (int)texture[k].rect.height, tempTexture);
-                w += 282;
+                w += 64;
             }
-            h += 213;
+            h += 64;
         }
         newSkillIcon.Apply();
         tempTexture = newSkillIcon;
