@@ -51,6 +51,9 @@ public class ball_collect_alphabet : NetworkBehaviour {
     static private string[] StrFIRE = { "F", "I", "R", "E" };
     static private string[] StrWIND = { "W", "I", "N", "D" };
 
+
+
+
     // FUNCION START
     // ========================================================================================================
 
@@ -81,7 +84,7 @@ public class ball_collect_alphabet : NetworkBehaviour {
             }
         }
 
-        GameObject go = GameObject.Find("AbilityPanel");
+        GameObject go = GameObject.Find("AbilityPa  nel");
         Image[] sr = go.GetComponentsInChildren<Image>();
         sr[0].sprite = CreateNewAbilitySprite();
 
@@ -245,8 +248,6 @@ public class ball_collect_alphabet : NetworkBehaviour {
             string prevDictSerialized = DictionaryToStr(charCount);
             unserializeDictionary();
             string currDictSerialized = DictionaryToStr(charCount);
-
-            //Debug.Log(currDictSerialized != prevDictSerialized);
             return (currDictSerialized != prevDictSerialized);
         }
     }
@@ -315,16 +316,6 @@ public class ball_collect_alphabet : NetworkBehaviour {
             }
             //Debug.Log("Skill: " + i + " : " + skillAvalible[i]);
         }
-
-        //string skillAvalibleStr = "";
-        //for (int i = 0; i < currentTexture.Count; i++)
-        //{
-        //    if (skillAvalible[i])
-        //    {
-        //        skillAvalibleStr += i.ToString();
-        //    }
-        //}
-        //Debug.Log(skillAvalibleStr);
     }
 
     [ClientRpc]
@@ -409,6 +400,7 @@ public class ball_collect_alphabet : NetworkBehaviour {
             return;
         } else
         {
+            PlayerHealth myHealth = this.GetComponent<PlayerHealth>();
             bool goodCmd = true;
             foreach (string alphabet in skill)
             {
@@ -432,18 +424,24 @@ public class ball_collect_alphabet : NetworkBehaviour {
             {
                 if (stringArrayEqual(skill,StrFIRE))
                 {
+                    myHealth.MageATK1();
                     MageATK.RpcATK1();
                     Debug.Log("FIRE");
-                } else if (stringArrayEqual(skill, StrWIND))
+                    
+                }
+                else if (stringArrayEqual(skill, StrWIND))
                 {
+                    myHealth.MageATK2();
                     MageATK.RpcATK2();
                     Debug.Log("WIND");
                 } else if (stringArrayEqual(skill, StrICE))
                 {
+                    myHealth.MageATK3();
                     MageATK.RpcATK3();
                     Debug.Log("ICE");
                 } else if (stringArrayEqual(skill, StrFLASH))
                 {
+                    myHealth.MageATK4();
                     MageATK.RpcATK4();
                     Debug.Log("FLASH");
                 }
