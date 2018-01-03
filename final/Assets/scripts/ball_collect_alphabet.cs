@@ -340,24 +340,24 @@ public class ball_collect_alphabet : NetworkBehaviour
     }
 
 
-    void useSkill()
+    void useSkill(int inputKey)
     {
-        if (skillAvalible[0] && Input.GetKeyDown(KeyCode.Alpha1))
+        if (skillAvalible[0] && (inputKey == 49) && Input.GetKeyDown(KeyCode.Mouse0))
         {
             //print("fire is clicked");
             CmdUseSkill(StrFIRE);
         }
-        if (skillAvalible[1] && Input.GetKeyDown(KeyCode.Alpha2))
+        if (skillAvalible[1] && (inputKey == 50 )&& Input.GetKeyDown(KeyCode.Mouse0))
         {
             //print("wind is clicked");
             CmdUseSkill(StrWIND);
         }
-        if (skillAvalible[2] && Input.GetKeyDown(KeyCode.Alpha3))
+        if (skillAvalible[2] && (inputKey == 51) && Input.GetKeyDown(KeyCode.Mouse0))
         {
             //print("Ice is clicked");
             CmdUseSkill(StrICE);
         }
-        if (skillAvalible[3] && Input.GetKeyDown(KeyCode.Alpha4))
+        if (skillAvalible[3] && (inputKey == 52) && Input.GetKeyDown(KeyCode.Mouse0))
         {
             //Debug.Log("flash is clicked");
             CmdUseSkill(StrFLASH);
@@ -480,7 +480,16 @@ public class ball_collect_alphabet : NetworkBehaviour
             }
             if (isLocalPlayer)
             {
-                useSkill();
+                int inputKey = 0;
+                if(Input.GetKeyDown( KeyCode.Alpha1))
+                        inputKey = 49;
+                if (Input.GetKeyDown(KeyCode.Alpha2))
+                    inputKey = 50;
+                if (Input.GetKeyDown(KeyCode.Alpha3))
+                    inputKey = 51;
+                if (Input.GetKeyDown(KeyCode.Alpha4))
+                    inputKey = 52;
+                useSkill(inputKey);
             }
         }
     }
