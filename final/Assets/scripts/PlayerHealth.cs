@@ -26,13 +26,15 @@ public class PlayerHealth : NetworkBehaviour
         currentHealth = startingHealth;
         neocontrol = GetComponent<neocontrol>();
         ball_Collect_Alphabet = GetComponent<ball_collect_alphabet>();
+        healthSlider = GameObject.FindGameObjectWithTag("Slider").GetComponent<Slider>();
+        damageImage = GameObject.FindGameObjectWithTag("SliderImage").GetComponent<Image>();
         //Debug.Log("healthSlider get/not: " + healthSlider);
     }
 
     // Update is called once per frame
     void Update()
     {
-        //Debug.Log(health);
+        Debug.Log(currentHealth);
         if (!isServer)
         {
             return;
@@ -54,8 +56,12 @@ public class PlayerHealth : NetworkBehaviour
 
     void OnChangeHealth(int health)
     {
+        if (!isLocalPlayer)
+        {
+            return;
+        }
         //Debug.Log("Health: " + health);
-        healthSlider.value = health;
+        healthSlider.value = currentHealth;
     }
 
     void Death()
@@ -86,14 +92,15 @@ public class PlayerHealth : NetworkBehaviour
         // ICE: whole game AOE
         players = GameObject.FindGameObjectsWithTag("player");
 
-        //Debug.Log("players.Length = " + players.Length.ToString());
+        Debug.Log("MageATK3");
+        Debug.Log("players.Length = " + players.Length.ToString());
         foreach (GameObject player in players)
         {
             Color playerColor = player.GetComponent<SetupLocalPlayer>().playerColor;
             //Debug.Log(playerColor); 
             if (playerColor != myColor)
             {
-                player.GetComponent<PlayerHealth>().currentHealth -= 2;
+                player.GetComponent<PlayerHealth>().currentHealth -= 10;
             }
         }
     }
