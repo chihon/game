@@ -2000,6 +2000,7 @@ GameObject:
   - component: {fileID: 114621638019647756}
   - component: {fileID: 23001502314600034}
   - component: {fileID: 102416841021801524}
+  - component: {fileID: 114545176459439630}
   m_Layer: 0
   m_Name: Soldier
   m_TagString: player
@@ -7042,6 +7043,25 @@ MonoBehaviour:
   pname: player
   playerColor: {r: 1, g: 1, b: 1, a: 1}
   career: career
+--- !u!114 &114545176459439630
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1801119520360172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1590678366, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Animator: {fileID: 95936176136078076}
+  m_ParameterSendBits: 4095
+  param0: 
+  param1: 
+  param2: 
+  param3: 
+  param4: 
+  param5: 
 --- !u!114 &114621638019647756
 MonoBehaviour:
   m_ObjectHideFlags: 1

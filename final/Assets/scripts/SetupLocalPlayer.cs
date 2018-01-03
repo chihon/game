@@ -26,6 +26,7 @@ public class SetupLocalPlayer : NetworkBehaviour {
 
     //public RuntimeAnimatorController anictrl; // 2L2H
     private TextMesh textmesh;
+    private Animator ani;
     void Start () {
         
         if (career == "Mage")
@@ -43,9 +44,11 @@ public class SetupLocalPlayer : NetworkBehaviour {
             WarrModel.name = "Body";
         }
         
-        Animator ani = this.GetComponent<Animator>();
+        ani = this.GetComponent<Animator>();
         //ani.runtimeAnimatorController = anictrl;
         ani.Rebind();
+        ani.SetBool("die", false);
+        ani.Play("Idle", 0, 0f);
 
         //ani.enable = true;
         //ani.play
@@ -67,6 +70,12 @@ public class SetupLocalPlayer : NetworkBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
+        if (ani.GetCurrentAnimatorStateInfo(0).IsName("die"))
+        {
+            Debug.Log("die");
+        } else if (ani.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
+        {
+            Debug.Log("Idle");
+        }
     }
 }
