@@ -21,29 +21,34 @@ public class SetupLocalPlayer : NetworkBehaviour {
     static Color[] Colors = new Color[] { Color.magenta, Color.red, Color.cyan, Color.blue, Color.green, Color.yellow }; // from LobbyPlayer.cs
 
 
-	// Use this for initialization
+    // Use this for initialization
 
+
+    //public RuntimeAnimatorController anictrl; // 2L2H
     private TextMesh textmesh;
     void Start () {
-
-        //MageModel.SetActive(true);
-        //GunnModel.SetActive(true);
-        //WarrModel.SetActive(true);
-
+        
         if (career == "Mage")
         {
             MageModel.SetActive(true);
-            MageModel.transform.SetAsFirstSibling();
+            MageModel.name = "Body";
         } else if (career == "Gunn")
         {
             GunnModel.SetActive(true);
-            GunnModel.transform.SetAsFirstSibling();
+            GunnModel.name = "Body";
         }
         else if (career == "Warr")
         {
             WarrModel.SetActive(true);
-            WarrModel.transform.SetAsFirstSibling();
+            WarrModel.name = "Body";
         }
+        
+        Animator ani = this.GetComponent<Animator>();
+        //ani.runtimeAnimatorController = anictrl;
+        ani.Rebind();
+
+        //ani.enable = true;
+        //ani.play
 
         if (!isLocalPlayer)
         {
