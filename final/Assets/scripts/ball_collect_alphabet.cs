@@ -472,14 +472,16 @@ public class ball_collect_alphabet : NetworkBehaviour
     {
         UIUpdateCountdown--;
         bool isChanged = collectAlphabetUpdate();
-        if (isChanged || UIUpdateCountdown <= 0)
-        {
-            UIUpdateCountdown = forceUIUpdateIntervalLength;
-            skillUIUpdate();
-        }
-        if (isLocalPlayer)
-        {
-            useSkill();
+        if (!isDead) { 
+            if (isChanged || UIUpdateCountdown <= 0)
+            {
+                UIUpdateCountdown = forceUIUpdateIntervalLength;
+                skillUIUpdate();
+            }
+            if (isLocalPlayer)
+            {
+                useSkill();
+            }
         }
     }
 

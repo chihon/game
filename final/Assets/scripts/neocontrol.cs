@@ -25,7 +25,7 @@ public class neocontrol : NetworkBehaviour
             return;
         }
         CharacterController controller = GetComponent<CharacterController>();
-        if (controller.isGrounded || isDead)
+        if (controller.isGrounded && !isDead)
         {
 
             moveDirection = new Vector3(-Input.GetAxis("Horizontal"), 0, -Input.GetAxis("Vertical"));
