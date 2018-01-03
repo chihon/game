@@ -5,17 +5,18 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
 
-public class ball_collect_alphabet : NetworkBehaviour {
+public class ball_collect_alphabet : NetworkBehaviour
+{
     //public UnityEngine.UI.Text msg;
 
-    
+
     private string alphabetChar;
-	private string alphabetCharCopy; // to avoid race condiciton
+    private string alphabetCharCopy; // to avoid race condiciton
 
     [SyncVar]
     public string dictionarySerializedSync;
 
-	private Dictionary<string, int> charCount;
+    private Dictionary<string, int> charCount;
 
     //public Dictionary<string, int> charCount;
     private List<string> allStrs;
@@ -38,12 +39,13 @@ public class ball_collect_alphabet : NetworkBehaviour {
     //Sprite[] sprites;
     //Mage atk
     private MageATKManager MageATK;
-	private WarrATKManager WarrATK;
-	private GunATKManager GunATK;
+    private WarrATKManager WarrATK;
+    private GunATKManager GunATK;
     private Texture tempTexture;
     private int maxWeight;
 
     private List<bool> skillAvalible;
+    public bool isDead;
 
 
     static private string[] StrICE = { "I", "C", "E" };
@@ -60,6 +62,7 @@ public class ball_collect_alphabet : NetworkBehaviour {
     // Use this for initialization
     void Start()
     {
+        isDead = false;
         UIUpdateCountdown = forceUIUpdateIntervalLength;
         alphabetChar = "";
         charCount = new Dictionary<string, int>();
@@ -71,9 +74,9 @@ public class ball_collect_alphabet : NetworkBehaviour {
         maxWeight = MageATK.maxLength;
         currentTexture = emptySpriteList(maxWeight);
 
-        for(int i = 0; i < allStrs.Count; i++)
+        for (int i = 0; i < allStrs.Count; i++)
         {
-            for(int j = 0; j < allStrs[i].Length; j++)
+            for (int j = 0; j < allStrs[i].Length; j++)
             {
                 string currChar = allStrs[i][j].ToString();
                 if (!charCount.ContainsKey(currChar))
@@ -84,7 +87,7 @@ public class ball_collect_alphabet : NetworkBehaviour {
             }
         }
 
-        GameObject go = GameObject.Find("AbilityPa  nel");
+        GameObject go = GameObject.Find("AbilityPanel");
         Image[] sr = go.GetComponentsInChildren<Image>();
         sr[0].sprite = CreateNewAbilitySprite();
 
@@ -107,31 +110,32 @@ public class ball_collect_alphabet : NetworkBehaviour {
         }
         return emptySpriteList;
     }
-    
+
 
     Sprite[] getMappingImage(string input, int maxLength)
     {
         Sprite[] contentArray = new Sprite[maxLength];
-        try { 
-        //Debug.Log("In getMappingImage: " + input + " : " + input.Length);    
-        for(int i = 0; i < input.Length; i++)
+        try
         {
-            // Debug.Log("Input: " + input[i]);
-            //contentArray[i] = sprites[ spriteList.IndexOf(input[i].ToString())];
-            contentArray[i] = Resources.Load<Sprite>("alpha2/"+input[i].ToString());
-            //Debug.Log(contentArray[i].name + " w: " + contentArray[i].rect.width + " h: " + contentArray[i].rect.height);
-        }
-        //Debug.Log("ContentArray before length: " + contentArray.Length);
-        if (input.Length < maxLength)
-        {
-            for(int i = input.Length; i < maxLength; i++)
+            //Debug.Log("In getMappingImage: " + input + " : " + input.Length);    
+            for (int i = 0; i < input.Length; i++)
             {
-                //contentArray[i] = sprites[17];
-                contentArray[i] =  Resources.Load<Sprite>("alpha2/0");
+                // Debug.Log("Input: " + input[i]);
+                //contentArray[i] = sprites[ spriteList.IndexOf(input[i].ToString())];
+                contentArray[i] = Resources.Load<Sprite>("alpha2/" + input[i].ToString());
+                //Debug.Log(contentArray[i].name + " w: " + contentArray[i].rect.width + " h: " + contentArray[i].rect.height);
+            }
+            //Debug.Log("ContentArray before length: " + contentArray.Length);
+            if (input.Length < maxLength)
+            {
+                for (int i = input.Length; i < maxLength; i++)
+                {
+                    //contentArray[i] = sprites[17];
+                    contentArray[i] = Resources.Load<Sprite>("alpha2/0");
+                }
             }
         }
-        }
-        catch(Exception e)
+        catch (Exception e)
         {
             Debug.Log(e.StackTrace);
         }
@@ -140,23 +144,29 @@ public class ball_collect_alphabet : NetworkBehaviour {
 
     }
 
-	bool listStringIdentical(List<string> a, List<string> b) {
-		if (a.Count != b.Count) {
-			return false;
-		}
-		for (int i = 0; i < a.Count; i++) {
-			if (a[i] != b[i]) {
-				return false;
-			}
-		}
-		return true;
-	}
-
-	void myEffect(List<string> code) {
-		if (listStringIdentical (code, new List<string> { "F", "L", "A", "S","H" })) {
-			print ("Flash done");
+    bool listStringIdentical(List<string> a, List<string> b)
+    {
+        if (a.Count != b.Count)
+        {
+            return false;
         }
-	}
+        for (int i = 0; i < a.Count; i++)
+        {
+            if (a[i] != b[i])
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    void myEffect(List<string> code)
+    {
+        if (listStringIdentical(code, new List<string> { "F", "L", "A", "S", "H" }))
+        {
+            print("Flash done");
+        }
+    }
 
     string DictionaryToStr(Dictionary<string, int> dict)
     {
@@ -182,14 +192,16 @@ public class ball_collect_alphabet : NetworkBehaviour {
             {
                 Debug.Log("Bad String " + str + " in StrToDicionary");
                 return result;
-            } else
+            }
+            else
             {
                 string key = Columns[0];
                 int cnt = int.Parse(Columns[1]);
                 if (!result.ContainsKey(key))
                 {
                     result.Add(key, cnt);
-                } else
+                }
+                else
                 {
                     result[key] = cnt;
                     Debug.Log("Duplicate entries, bad string " + str + " in StrToDicionary");
@@ -243,7 +255,8 @@ public class ball_collect_alphabet : NetworkBehaviour {
             }
             return isChanged;
 
-        } else
+        }
+        else
         {
             string prevDictSerialized = DictionaryToStr(charCount);
             unserializeDictionary();
@@ -255,23 +268,25 @@ public class ball_collect_alphabet : NetworkBehaviour {
     string CheckCurrSkillWordCount(string currSkill)
     {
         string output = "";
-        for(int i = 0; i < currSkill.Length; i++)
+        for (int i = 0; i < currSkill.Length; i++)
         {
-        string currChar = currSkill[i].ToString();
-        try { 
-            if (charCount[currChar] > 0)
+            string currChar = currSkill[i].ToString();
+            try
             {
-                output += currChar;
+                if (charCount[currChar] > 0)
+                {
+                    output += currChar;
+                }
+                else
+                {
+                    output += "0";
+                }
             }
-            else
+            catch (Exception e)
             {
-                output += "0";
+                Debug.Log("CurrChar in catch: " + currChar);
+                Debug.Log(e.StackTrace);
             }
-        }catch(Exception e)
-        {
-            Debug.Log("CurrChar in catch: " + currChar);
-            Debug.Log(e.StackTrace);
-        }
         }
         return output;
     }
@@ -286,7 +301,7 @@ public class ball_collect_alphabet : NetworkBehaviour {
         currentTexture = new List<Sprite[]>(allStrs.Count);
         for (int i = 0; i < allStrs.Count; i++)
         {
-                currentTexture.Add(getMappingImage(CheckCurrSkillWordCount(allStrs[i]), maxWeight));
+            currentTexture.Add(getMappingImage(CheckCurrSkillWordCount(allStrs[i]), maxWeight));
         }
         GameObject go = GameObject.Find("AbilityPanel");
         Image[] sr = go.GetComponentsInChildren<Image>();
@@ -325,7 +340,7 @@ public class ball_collect_alphabet : NetworkBehaviour {
     }
 
 
-    void useSkill ()
+    void useSkill()
     {
         if (skillAvalible[0] && Input.GetKeyDown(KeyCode.Alpha1))
         {
@@ -350,7 +365,7 @@ public class ball_collect_alphabet : NetworkBehaviour {
     }
 
     [Command]
-    void CmdUseSkill(string [] skill)
+    void CmdUseSkill(string[] skill)
     {
         ServerUseSkill(skill);
     }
@@ -376,7 +391,7 @@ public class ball_collect_alphabet : NetworkBehaviour {
         }
     }
 
-    static bool stringArrayEqual(string [] a, string [] b)
+    static bool stringArrayEqual(string[] a, string[] b)
     {
         if (a.Length != b.Length)
         {
@@ -392,13 +407,14 @@ public class ball_collect_alphabet : NetworkBehaviour {
         return true;
     }
 
-    void ServerUseSkill(string [] skill)
+    void ServerUseSkill(string[] skill)
     {
         // server help check skill
         if (!isServer)
         {
             return;
-        } else
+        }
+        else
         {
             PlayerHealth myHealth = this.GetComponent<PlayerHealth>();
             bool goodCmd = true;
@@ -422,24 +438,26 @@ public class ball_collect_alphabet : NetworkBehaviour {
             }
             if (goodCmd)
             {
-                if (stringArrayEqual(skill,StrFIRE))
+                if (stringArrayEqual(skill, StrFIRE))
                 {
                     myHealth.MageATK1();
                     MageATK.RpcATK1();
                     Debug.Log("FIRE");
-                    
+
                 }
                 else if (stringArrayEqual(skill, StrWIND))
                 {
                     myHealth.MageATK2();
                     MageATK.RpcATK2();
                     Debug.Log("WIND");
-                } else if (stringArrayEqual(skill, StrICE))
+                }
+                else if (stringArrayEqual(skill, StrICE))
                 {
                     myHealth.MageATK3();
                     MageATK.RpcATK3();
                     Debug.Log("ICE");
-                } else if (stringArrayEqual(skill, StrFLASH))
+                }
+                else if (stringArrayEqual(skill, StrFLASH))
                 {
                     myHealth.MageATK4();
                     MageATK.RpcATK4();
@@ -450,7 +468,8 @@ public class ball_collect_alphabet : NetworkBehaviour {
 
     }
 
-    void Update () {
+    void Update()
+    {
         UIUpdateCountdown--;
         bool isChanged = collectAlphabetUpdate();
         if (isChanged || UIUpdateCountdown <= 0)
@@ -464,13 +483,15 @@ public class ball_collect_alphabet : NetworkBehaviour {
         }
     }
 
-	string charsToString (List<string> chars) {
-		string charsStr = "";
-		for (int i = 0; i < chars.Count; i++) {
-			charsStr += chars[i];
-		}
-		return charsStr;
-	}
+    string charsToString(List<string> chars)
+    {
+        string charsStr = "";
+        for (int i = 0; i < chars.Count; i++)
+        {
+            charsStr += chars[i];
+        }
+        return charsStr;
+    }
 
     bool checkString(string chars)
     {
@@ -504,9 +525,10 @@ public class ball_collect_alphabet : NetworkBehaviour {
         return true;
     }
 
-    void OnCollisionEnter(Collision coll) {
-		// just wait alphabet to write in
-	}
+    void OnCollisionEnter(Collision coll)
+    {
+        // just wait alphabet to write in
+    }
 
     public void SetAlphabetChar(string str)
     {

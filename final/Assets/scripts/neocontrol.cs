@@ -3,15 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class neocontrol : NetworkBehaviour {
+public class neocontrol : NetworkBehaviour
+{
 
     public float speed = 3.0F;
-    public float jumpForce = 7.0F;
+    public float jumpForce = 10.0F;
     public float gravity = 20.0F;
     private Vector3 moveDirection = Vector3.zero;
-
-
-
+    public bool isDead = false;
 
     void Start()
     {
@@ -26,7 +25,7 @@ public class neocontrol : NetworkBehaviour {
             return;
         }
         CharacterController controller = GetComponent<CharacterController>();
-        if (controller.isGrounded)
+        if (controller.isGrounded || isDead)
         {
 
             moveDirection = new Vector3(-Input.GetAxis("Horizontal"), 0, -Input.GetAxis("Vertical"));

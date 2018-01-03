@@ -1,14 +1,15 @@
-﻿<Properties StartupItem="Assembly-CSharp.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/scripts/ATKs/GrenadeExplode.cs">
+﻿<Properties StartupItem="final.Plugins.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\PlayerHealth.cs">
     <Files>
-      <File FileName="Assets/scripts/ball_collect_alphabet.cs" Line="197" Column="6" />
-      <File FileName="Assets/scripts/ATKs/GunATKManager.cs" Line="1" Column="1" />
-      <File FileName="Assets/scripts/ATKs/MageATKManager.cs" Line="1" Column="1" />
-      <File FileName="Assets/scripts/ATKs/WarrATKManager.cs" Line="54" Column="74" />
-      <File FileName="Assets/scripts/EffectTime.cs" Line="30" Column="1" />
-      <File FileName="Assets/scripts/ATKs/PistolBulletEff.cs" Line="22" Column="23" />
-      <File FileName="Assets/scripts/ATKs/GrenadeExplode.cs" Line="22" Column="1" />
+      <File FileName="Assets\scripts\ball_collect_alphabet.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\ATKs\GunATKManager.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\ATKs\MageATKManager.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\ATKs\WarrATKManager.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\EffectTime.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\ATKs\PistolBulletEff.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\ATKs\GrenadeExplode.cs" Line="22" Column="1" />
+      <File FileName="Assets\scripts\PlayerHealth.cs" Line="34" Column="6" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
