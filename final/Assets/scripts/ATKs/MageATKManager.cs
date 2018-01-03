@@ -64,6 +64,10 @@ public class MageATKManager : NetworkBehaviour
             Instantiate(m_FireRitual, m_Ritual.position, Quaternion.identity);
 
         shellInstance.velocity = m_FireRotat.forward * m_FireSpeed;
+        if (shellInstance.detectCollisions)
+        {
+            
+        }
     }
     //Wind ATK
     public void ATK2()

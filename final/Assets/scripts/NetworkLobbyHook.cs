@@ -18,7 +18,7 @@ public class NetworkLobbyHook : LobbyHook {
         localPlayer.pname = lobby.playerName;
         localPlayer.playerColor = lobby.playerColor;
         localPlayer.career = getCareerByColor(lobby.playerColor);
-        myHealth.health = 20;
+        myHealth.currentHealth = 20;
     }
 
     string getCareerByColor(Color c)

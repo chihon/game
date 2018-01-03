@@ -44,6 +44,7 @@ public class ball_collect_alphabet : NetworkBehaviour {
     private int maxWeight;
 
     private List<bool> skillAvalible;
+    public bool isDead;
 
 
     static private string[] StrICE = { "I", "C", "E" };
@@ -60,6 +61,7 @@ public class ball_collect_alphabet : NetworkBehaviour {
     // Use this for initialization
     void Start()
     {
+        isDead = false;
         UIUpdateCountdown = forceUIUpdateIntervalLength;
         alphabetChar = "";
         charCount = new Dictionary<string, int>();
@@ -84,7 +86,7 @@ public class ball_collect_alphabet : NetworkBehaviour {
             }
         }
 
-        GameObject go = GameObject.Find("AbilityPa  nel");
+        GameObject go = GameObject.Find("AbilityPanel");
         Image[] sr = go.GetComponentsInChildren<Image>();
         sr[0].sprite = CreateNewAbilitySprite();
 
@@ -451,16 +453,18 @@ public class ball_collect_alphabet : NetworkBehaviour {
     }
 
     void Update () {
-        UIUpdateCountdown--;
-        bool isChanged = collectAlphabetUpdate();
-        if (isChanged || UIUpdateCountdown <= 0)
-        {
-            UIUpdateCountdown = forceUIUpdateIntervalLength;
-            skillUIUpdate();
-        }
-        if (isLocalPlayer)
-        {
-            useSkill();
+        if (!isDead) { 
+            UIUpdateCountdown--;
+            bool isChanged = collectAlphabetUpdate();
+            if (isChanged || UIUpdateCountdown <= 0)
+            {
+                UIUpdateCountdown = forceUIUpdateIntervalLength;
+                skillUIUpdate();
+            }
+            if (isLocalPlayer)
+            {
+                useSkill();
+            }
         }
     }
 
