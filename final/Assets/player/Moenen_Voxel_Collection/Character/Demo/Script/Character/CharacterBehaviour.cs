@@ -369,6 +369,22 @@
             }
         }
 
+        private bool Anidie
+        {
+            get
+            {
+                return Ani.GetBool("die");
+            }
+            set
+            {
+                Ani.SetBool("die", true);
+            }
+        }
+
+
+
+
+
         #endregion
 
         private float NextAttackTime = float.MinValue;
@@ -771,6 +787,14 @@
                 AimVelocity.z = dash.z;
             }
         }
+
+
+        public void die()
+        {
+            //Debug.Log("dieHealth = 123 ");
+            Anidie = true;
+        }
+
 
 
         /// <summary>

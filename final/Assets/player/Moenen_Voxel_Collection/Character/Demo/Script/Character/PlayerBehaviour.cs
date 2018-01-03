@@ -78,7 +78,7 @@
 
         protected override void Update()
         {
-            if (!isLocalPlayer) {return; }
+            if (!isLocalPlayer) { return; }
             MovementUpdate();
 
             JumpUpdate();
@@ -87,11 +87,22 @@
 
             DashUpdate();
 
+            dieUpdate();
+
             base.Update();
+
+
 
         }
 
-
+        void dieUpdate()
+        {
+            if (PlayerHealth.dieHealth == 0)
+            {
+                //Debug.Log("dieHealth = 1 ");
+                base.die();
+            }
+        }
 
         void MovementUpdate()
         {

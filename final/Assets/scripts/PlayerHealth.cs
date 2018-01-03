@@ -11,6 +11,7 @@ public class PlayerHealth : NetworkBehaviour
     public const int startingHealth = 100;
     [SyncVar(hook = "OnChangeHealth")]
     public int currentHealth;
+    public static int dieHealth = 1;
     public Slider healthSlider;
     public Image damageImage;
     neocontrol neocontrol;
@@ -50,6 +51,7 @@ public class PlayerHealth : NetworkBehaviour
 
         if (currentHealth <= 0 && !isDead)
         {
+            dieHealth = 0;
             Death();
         }
     }
