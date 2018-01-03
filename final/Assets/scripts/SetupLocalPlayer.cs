@@ -72,10 +72,10 @@ public class SetupLocalPlayer : NetworkBehaviour {
 	void Update () {
         if (ani.GetCurrentAnimatorStateInfo(0).IsName("die"))
         {
-            Debug.Log("die");
+            //Debug.Log("die");
         } else if (ani.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
         {
-            Debug.Log("Idle");
+            //Debug.Log("Idle");
         }
     }
 }

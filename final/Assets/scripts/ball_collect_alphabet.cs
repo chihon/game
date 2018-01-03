@@ -46,15 +46,22 @@ public class ball_collect_alphabet : NetworkBehaviour
 
     private List<bool> skillAvalible;
     public bool isDead;
-
+    private string career; // please read career from SetupLocalPlayer Class
 
     static private string[] StrICE = { "I", "C", "E" };
     static private string[] StrFLASH = { "F", "L", "A", "S", "H" };
     static private string[] StrFIRE = { "F", "I", "R", "E" };
     static private string[] StrWIND = { "W", "I", "N", "D" };
+    static private string[] StrSWORD = { "S", "W", "O", "R", "D" };
+    static private string[] StrRUSH = { "R", "U", "S", "H" };
+    static private string[] StrSHEILD = { "S", "H", "E", "I", "L", "D" };
+    static private string[] StrWARWING = { "W", "A", "R", "W", "I", "N", "G" };
+    static private string[] StrGUN = { "G","U","N" };
+    static private string[] StrPISTOL = { "P","I","S","T","O","L" };
+    static private string[] StrGRENADE = { "G","R","E","N","A","D","E" };
+    static private string[] StrSATELLITE = { "S","A","T","E","L","L","I","T","E" };
 
-
-
+    
 
     // FUNCION START
     // ========================================================================================================
@@ -68,10 +75,27 @@ public class ball_collect_alphabet : NetworkBehaviour
         charCount = new Dictionary<string, int>();
         allStrs = new List<string>();
         currentTexture = new List<Sprite[]>();
-
+        career = this.GetComponent<SetupLocalPlayer>().career;
+        Debug.Log("career = " + career);
+        
         MageATK = GetComponent<MageATKManager>();
-        allStrs = MageATK.abilityList;
-        maxWeight = MageATK.maxLength;
+        WarrATK = GetComponent<WarrATKManager>();
+        GunATK = GetComponent<GunATKManager>();
+
+        if (career == "Mage")
+        {
+            allStrs = MageATK.abilityList;
+            maxWeight = MageATK.maxLength;
+        } else if (career == "Warr")
+        {
+            allStrs = WarrATK.abilityList;
+            maxWeight = WarrATK.maxLength;
+        } else if (career == "Gunn")
+        {
+            allStrs = GunATK.abilityList;
+            maxWeight = GunATK.maxLength;
+        }
+
         currentTexture = emptySpriteList(maxWeight);
 
         for (int i = 0; i < allStrs.Count; i++)
@@ -84,6 +108,14 @@ public class ball_collect_alphabet : NetworkBehaviour
                     charCount.Add(currChar, 0);
                     Debug.Log("Word Add To Dic: " + currChar);
                 }
+            }
+        }
+        for (char c = 'A'; c <= 'Z'; c++)
+        {
+            string currChar = c.ToString();
+            if (!charCount.ContainsKey(currChar))
+            {
+                charCount.Add(currChar, 0);
             }
         }
 
@@ -339,28 +371,70 @@ public class ball_collect_alphabet : NetworkBehaviour
         skillUIUpdate();
     }
 
-
     void useSkill(int inputKey)
     {
         if (skillAvalible[0] && (inputKey == 49) && Input.GetKeyDown(KeyCode.Mouse0))
         {
-            //print("fire is clicked");
-            CmdUseSkill(StrFIRE);
+            Debug.Log("atk 1");
+            if (career == "Mage")
+            {
+                CmdUseSkill(StrFIRE);
+            } else if (career == "Gunn")
+            {
+                CmdUseSkill(StrGUN);
+            } else if (career == "Warr")
+            {
+                CmdUseSkill(StrSWORD);
+            }
+            
         }
         if (skillAvalible[1] && (inputKey == 50 )&& Input.GetKeyDown(KeyCode.Mouse0))
         {
-            //print("wind is clicked");
-            CmdUseSkill(StrWIND);
+            Debug.Log("atk 2");
+            if (career == "Mage")
+            {
+                CmdUseSkill(StrWIND);
+            }
+            else if (career == "Gunn")
+            {
+                CmdUseSkill(StrPISTOL);
+            }
+            else if (career == "Warr")
+            {
+                CmdUseSkill(StrRUSH);
+            }
         }
         if (skillAvalible[2] && (inputKey == 51) && Input.GetKeyDown(KeyCode.Mouse0))
         {
-            //print("Ice is clicked");
-            CmdUseSkill(StrICE);
+            Debug.Log("atk 3");
+            if (career == "Mage")
+            {
+                CmdUseSkill(StrICE);
+            }
+            else if (career == "Gunn")
+            {
+                CmdUseSkill(StrGRENADE);
+            }
+            else if (career == "Warr")
+            {
+                CmdUseSkill(StrSHEILD);
+            }
         }
         if (skillAvalible[3] && (inputKey == 52) && Input.GetKeyDown(KeyCode.Mouse0))
         {
-            //Debug.Log("flash is clicked");
-            CmdUseSkill(StrFLASH);
+            Debug.Log("atk 4");
+            if (career == "Mage")
+            {
+                CmdUseSkill(StrFLASH);
+            }
+            else if (career == "Gunn")
+            {
+                CmdUseSkill(StrSATELLITE);
+            }
+            else if (career == "Warr")
+            {
+                CmdUseSkill(StrWARWING);
+            }
         }
     }
 
@@ -443,7 +517,6 @@ public class ball_collect_alphabet : NetworkBehaviour
                     myHealth.MageATK1();
                     MageATK.RpcATK1();
                     Debug.Log("FIRE");
-
                 }
                 else if (stringArrayEqual(skill, StrWIND))
                 {
@@ -462,6 +535,54 @@ public class ball_collect_alphabet : NetworkBehaviour
                     myHealth.MageATK4();
                     MageATK.RpcATK4();
                     Debug.Log("FLASH");
+                }
+                else if (stringArrayEqual(skill, StrSWORD))
+                {
+                    myHealth.WarrATK1();
+                    WarrATK.RpcATK1();
+                    Debug.Log("SWORD");
+                }
+                else if (stringArrayEqual(skill, StrRUSH))
+                {
+                    myHealth.WarrATK2();
+                    WarrATK.RpcATK2();
+                    Debug.Log("RUSH");
+                }
+                else if (stringArrayEqual(skill, StrSHEILD))
+                {
+                    myHealth.WarrATK3();
+                    WarrATK.RpcATK3();
+                    Debug.Log("SHEILD");
+                }
+                else if (stringArrayEqual(skill, StrWARWING))
+                {
+                    myHealth.WarrATK4();
+                    WarrATK.RpcATK4();
+                    Debug.Log("WARWING");
+                }
+                else if (stringArrayEqual(skill, StrGUN))
+                {
+                    myHealth.GunATK1();
+                    GunATK.RpcATK1();
+                    Debug.Log("GUN");
+                }
+                else if (stringArrayEqual(skill, StrPISTOL))
+                {
+                    myHealth.GunATK2();
+                    GunATK.RpcATK2();
+                    Debug.Log("PISTOL");
+                }
+                else if (stringArrayEqual(skill, StrGRENADE))
+                {
+                    myHealth.GunATK3();
+                    GunATK.RpcATK3();
+                    Debug.Log("GRENADE");
+                }
+                else if (stringArrayEqual(skill, StrSATELLITE))
+                {
+                    myHealth.GunATK4();
+                    GunATK.RpcATK4();
+                    Debug.Log("SATELLITE");
                 }
             }
         }

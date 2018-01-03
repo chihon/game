@@ -36,7 +36,7 @@ public class PlayerHealth : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(currentHealth);
+        //Debug.Log(currentHealth);
         if (!isServer)
         {
             return;
@@ -110,5 +110,37 @@ public class PlayerHealth : NetworkBehaviour
     public void MageATK4()
     {
         currentHealth += 30;
+    }
+    public void WarrATK1()
+    {
+
+    }
+    public void WarrATK2()
+    {
+
+    }
+    public void WarrATK3()
+    {
+
+    }
+    public void WarrATK4()
+    {
+
+    }
+    public void GunATK1()
+    {
+
+    }
+    public void GunATK2()
+    {
+
+    }
+    public void GunATK3()
+    {
+
+    }
+    public void GunATK4()
+    {
+
     }
 }

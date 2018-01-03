@@ -13,7 +13,7 @@ public class spawn : NetworkBehaviour {
     //public float spawnLesatWait;
     public bool stop;
 
-    private int LetterLimit = 20; // modify this only in script and set as private, in order to be applied to the whole game.
+    private int LetterLimit = 40; // modify this only in script and set as private, in order to be applied to the whole game.
 
 
     int randletter;

@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class WarrATKManager : MonoBehaviour {
+public class WarrATKManager : NetworkBehaviour {
 	
 	//public Rigidbody m_Sword;
 	//public Rigidbody m_Rush;
@@ -17,14 +18,20 @@ public class WarrATKManager : MonoBehaviour {
 	public Transform m_FireRotat;
 	// Use this for initialization
 	
-	public List<List<string>> abilityList;
+	//public List<List<string>> abilityList;
+    public List<string> abilityList;
     public int maxLength;
 	void Start () {
-		abilityList = new List<List<string>>();
-        abilityList.Add(new List<string> { "S", "W", "O", "R", "D" });
-        abilityList.Add(new List<string> { "R", "U", "S", "H" });
-        abilityList.Add(new List<string> { "S", "H", "E", "I", "L", "D" });
-        abilityList.Add(new List<string> { "W", "A", "R", "W", "I", "N", "G" });
+		//abilityList = new List<List<string>>();
+        //abilityList.Add(new List<string> { "S", "W", "O", "R", "D" });
+        //abilityList.Add(new List<string> { "R", "U", "S", "H" });
+        //abilityList.Add(new List<string> { "S", "H", "E", "I", "L", "D" });
+        //abilityList.Add(new List<string> { "W", "A", "R", "W", "I", "N", "G" });
+        abilityList = new List<string>();
+        abilityList.Add("SWORD");
+        abilityList.Add("RUSH");
+        abilityList.Add("SHEILD");
+        abilityList.Add("WARWING");
         maxLength = 7;
 	}
 	
@@ -60,4 +67,24 @@ public class WarrATKManager : MonoBehaviour {
 		GameObject RitualInstance = 
 			Instantiate (m_WarwingRitual, m_Ritual.position, Quaternion.identity);
 	}
+    [ClientRpc]
+    public void RpcATK4()
+    {
+        ATK4();
+    }
+    [ClientRpc]
+    public void RpcATK3()
+    {
+        ATK3();
+    }
+    [ClientRpc]
+    public void RpcATK2()
+    {
+        ATK2();
+    }
+    [ClientRpc]
+    public void RpcATK1()
+    {
+        ATK1();
+    }
 }
