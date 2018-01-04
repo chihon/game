@@ -97,7 +97,7 @@
 
         void dieUpdate()
         {
-            if (PlayerHealth.dieHealth == 0)
+            if (PlayerHealth.isDead)
             {
                 //Debug.Log("dieHealth = 1 ");
                 base.die();

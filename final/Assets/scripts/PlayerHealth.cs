@@ -11,13 +11,12 @@ public class PlayerHealth : NetworkBehaviour
     public const int startingHealth = 100;
     [SyncVar(hook = "OnChangeHealth")]
     public int currentHealth;
-    public static int dieHealth = 1;
     public Slider healthSlider;
     public Image damageImage;
     neocontrol neocontrol;
     ball_collect_alphabet ball_Collect_Alphabet;
 
-    bool isDead;
+    public static bool isDead;
     bool damaged;
 
     public GameObject[] players;
@@ -25,7 +24,6 @@ public class PlayerHealth : NetworkBehaviour
     void Awake()
     {
         isDead = false;
-        dieHealth = 1;
         currentHealth = startingHealth;
         neocontrol = GetComponent<neocontrol>();
         ball_Collect_Alphabet = GetComponent<ball_collect_alphabet>();
@@ -53,7 +51,6 @@ public class PlayerHealth : NetworkBehaviour
 
         if (currentHealth <= 0 && !isDead)
         {
-            dieHealth = 0;
             Death();
         }
     }
@@ -71,6 +68,7 @@ public class PlayerHealth : NetworkBehaviour
     void Death()
     {
         Debug.Log("Dead");
+        isDead = true;
         neocontrol.isDead = true;
         ball_Collect_Alphabet.isDead = true;
     }
