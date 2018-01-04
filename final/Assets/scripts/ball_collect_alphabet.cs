@@ -373,7 +373,7 @@ public class ball_collect_alphabet : NetworkBehaviour
 
     void useSkill(int inputKey)
     {
-        if (skillAvalible[0] && (inputKey == 49) && Input.GetKeyDown(KeyCode.Mouse0))
+        if (skillAvalible[0] && (inputKey == 49))
         {
             Debug.Log("atk 1");
             if (career == "Mage")
@@ -388,12 +388,12 @@ public class ball_collect_alphabet : NetworkBehaviour
             }
             
         }
-        if (skillAvalible[1] && (inputKey == 50 )&& Input.GetKeyDown(KeyCode.Mouse0))
+        if (skillAvalible[1] && (inputKey == 50 ))
         {
             Debug.Log("atk 2");
             if (career == "Mage")
             {
-                CmdUseSkill(StrWIND);
+                CmdUseSkill(StrICE);
             }
             else if (career == "Gunn")
             {
@@ -401,15 +401,15 @@ public class ball_collect_alphabet : NetworkBehaviour
             }
             else if (career == "Warr")
             {
-                CmdUseSkill(StrRUSH);
+                CmdUseSkill(StrWARWING);
             }
         }
-        if (skillAvalible[2] && (inputKey == 51) && Input.GetKeyDown(KeyCode.Mouse0))
+        if (skillAvalible[2] && (inputKey == 51))
         {
             Debug.Log("atk 3");
             if (career == "Mage")
             {
-                CmdUseSkill(StrICE);
+                CmdUseSkill(StrFLASH);
             }
             else if (career == "Gunn")
             {
@@ -417,7 +417,7 @@ public class ball_collect_alphabet : NetworkBehaviour
             }
             else if (career == "Warr")
             {
-                CmdUseSkill(StrSHEILD);
+                CmdUseSkill(StrRUSH);
             }
         }
         if (skillAvalible[3] && (inputKey == 52) && Input.GetKeyDown(KeyCode.Mouse0))
@@ -425,7 +425,7 @@ public class ball_collect_alphabet : NetworkBehaviour
             Debug.Log("atk 4");
             if (career == "Mage")
             {
-                CmdUseSkill(StrFLASH);
+                CmdUseSkill(StrWIND);
             }
             else if (career == "Gunn")
             {
@@ -433,7 +433,7 @@ public class ball_collect_alphabet : NetworkBehaviour
             }
             else if (career == "Warr")
             {
-                CmdUseSkill(StrWARWING);
+                CmdUseSkill(StrSHEILD);
             }
         }
     }
@@ -602,13 +602,13 @@ public class ball_collect_alphabet : NetworkBehaviour
             if (isLocalPlayer)
             {
                 int inputKey = 0;
-                if(Input.GetKeyDown( KeyCode.Alpha1))
+                if(Input.GetKeyDown( KeyCode.Mouse0))
                         inputKey = 49;
-                if (Input.GetKeyDown(KeyCode.Alpha2))
+                if (Input.GetKeyDown(KeyCode.Mouse1))
                     inputKey = 50;
-                if (Input.GetKeyDown(KeyCode.Alpha3))
+                if (Input.GetKeyDown(KeyCode.Alpha1))
                     inputKey = 51;
-                if (Input.GetKeyDown(KeyCode.Alpha4))
+                if (Input.GetKeyDown(KeyCode.Alpha2))
                     inputKey = 52;
                 useSkill(inputKey);
             }
