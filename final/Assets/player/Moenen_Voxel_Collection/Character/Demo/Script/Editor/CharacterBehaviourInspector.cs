@@ -628,9 +628,12 @@
             ch.behaviourSetting.RunSpeed = 6f;
             ch.behaviourSetting.WalkSpeed = 2f;
             ch.behaviourSetting.JumpPower = 16;
-            ch.behaviourSetting.JumpCount = 2;
+            ch.behaviourSetting.JumpCount = 1;
             ch.behaviourSetting.DashSpeed = 24f;
-            ch.behaviourSetting.DashDistance = 3f;
+            if (SetupLocalPlayer.careers == "Warr")
+                ch.behaviourSetting.DashDistance = 8f;
+            else
+                ch.behaviourSetting.DashDistance = 0f;
             ch.behaviourSetting.DashGap = 0.2f;
             ch.behaviourSetting.DefaultHand.Default();
         }

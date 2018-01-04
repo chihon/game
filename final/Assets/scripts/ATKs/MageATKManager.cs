@@ -41,11 +41,24 @@ public class MageATKManager : NetworkBehaviour
     void Start()
     {
         abilityList = new List<string>();
-    
+
+        //abilityList.Add("ICE");
+        //abilityList.Add("ICE");
+        //abilityList.Add("ICE");
+        //abilityList.Add("ICE");
+        //abilityList.Add("FIRE");
+        //abilityList.Add("ICE");
+        //abilityList.Add("FLASH");
+        //abilityList.Add("WIND");
+        
+        abilityList.Add("FIRE");
+        abilityList.Add("ICE");
         abilityList.Add("WIND");
         abilityList.Add("FLASH");
-        abilityList.Add("ICE");
-        abilityList.Add("FIRE");
+
+
+
+
         maxLength = 5;
     }
 

@@ -575,7 +575,8 @@
             if (CurrentJumpCount < behaviourSetting.JumpCount)
             {
                 transform.Translate(0f, 0.01f, 0f);
-                AimVelocity.y = Mathf.Clamp01(power) * (float)behaviourSetting.JumpPower;
+               
+                    AimVelocity.y = Mathf.Clamp01(power) * (float)behaviourSetting.JumpPower;
                 CurrentJumpCount++;
             }
         }
@@ -714,11 +715,13 @@
         /// <returns></returns>
         public bool Attack(int id = 1)
         {
+            
 
-            if (Attacking || AniDash || Time.time < NextAttackTime || AniWeaponBehaviourID == 0)
+                if (Attacking || AniDash || Time.time < NextAttackTime || AniWeaponBehaviourID == 0)
             {
                 return false;
             }
+
 
             if (AniOnGround)
             {
@@ -744,6 +747,7 @@
             }
             else
             {
+                
                 AniAttack2 = true;
                 NextAttackTime = Time.time + 1f / LogicAttackSpeed2;
                 CancelInvoke();
@@ -810,6 +814,10 @@
         public void Dash()
         {
             BreakAttack();
+            if (SetupLocalPlayer.careers == "Warr")
+                behaviourSetting.DashDistance = 8f;
+            else
+                return;
             if (!AniDash && Time.time > NextDashTime)
             {
                 AniDash = true;

@@ -56,12 +56,12 @@ public class ball_collect_alphabet : NetworkBehaviour
     static private string[] StrRUSH = { "R", "U", "S", "H" };
     static private string[] StrSHEILD = { "S", "H", "E", "I", "L", "D" };
     static private string[] StrWARWING = { "W", "A", "R", "W", "I", "N", "G" };
-    static private string[] StrGUN = { "G","U","N" };
-    static private string[] StrPISTOL = { "P","I","S","T","O","L" };
-    static private string[] StrGRENADE = { "G","R","E","N","A","D","E" };
-    static private string[] StrSATELLITE = { "S","A","T","E","L","L","I","T","E" };
+    static private string[] StrGUN = { "G", "U", "N" };
+    static private string[] StrPISTOL = { "P", "I", "S", "T", "O", "L" };
+    static private string[] StrGRENADE = { "G", "R", "E", "N", "A", "D", "E" };
+    static private string[] StrSATELLITE = { "S", "A", "T", "E", "L", "L", "I", "T", "E" };
 
-    
+
 
     // FUNCION START
     // ========================================================================================================
@@ -77,7 +77,7 @@ public class ball_collect_alphabet : NetworkBehaviour
         currentTexture = new List<Sprite[]>();
         career = this.GetComponent<SetupLocalPlayer>().career;
         Debug.Log("career = " + career);
-        
+
         MageATK = GetComponent<MageATKManager>();
         WarrATK = GetComponent<WarrATKManager>();
         GunATK = GetComponent<GunATKManager>();
@@ -86,11 +86,13 @@ public class ball_collect_alphabet : NetworkBehaviour
         {
             allStrs = MageATK.abilityList;
             maxWeight = MageATK.maxLength;
-        } else if (career == "Warr")
+        }
+        else if (career == "Warr")
         {
             allStrs = WarrATK.abilityList;
             maxWeight = WarrATK.maxLength;
-        } else if (career == "Gunn")
+        }
+        else if (career == "Gunn")
         {
             allStrs = GunATK.abilityList;
             maxWeight = GunATK.maxLength;
@@ -373,22 +375,25 @@ public class ball_collect_alphabet : NetworkBehaviour
 
     void useSkill(int inputKey)
     {
-        if (skillAvalible[0] && (inputKey == 49))
+        Debug.Log("useSkill" + inputKey.ToString());
+        if (skillAvalible[0] && (inputKey == 49) && Input.GetKeyDown(KeyCode.Mouse0))
         {
             Debug.Log("atk 1");
             if (career == "Mage")
             {
                 CmdUseSkill(StrFIRE);
-            } else if (career == "Gunn")
+            }
+            else if (career == "Gunn")
             {
                 CmdUseSkill(StrGUN);
-            } else if (career == "Warr")
+            }
+            else if (career == "Warr")
             {
                 CmdUseSkill(StrSWORD);
             }
-            
+
         }
-        if (skillAvalible[1] && (inputKey == 50 ))
+        if (skillAvalible[1] && (inputKey == 50) && Input.GetKeyDown(KeyCode.Mouse0))
         {
             Debug.Log("atk 2");
             if (career == "Mage")
@@ -404,25 +409,9 @@ public class ball_collect_alphabet : NetworkBehaviour
                 CmdUseSkill(StrWARWING);
             }
         }
-        if (skillAvalible[2] && (inputKey == 51))
+        if (skillAvalible[2] && (inputKey == 51) && Input.GetKeyDown(KeyCode.Mouse0))
         {
             Debug.Log("atk 3");
-            if (career == "Mage")
-            {
-                CmdUseSkill(StrFLASH);
-            }
-            else if (career == "Gunn")
-            {
-                CmdUseSkill(StrGRENADE);
-            }
-            else if (career == "Warr")
-            {
-                CmdUseSkill(StrRUSH);
-            }
-        }
-        if (skillAvalible[3] && (inputKey == 52) && Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            Debug.Log("atk 4");
             if (career == "Mage")
             {
                 CmdUseSkill(StrWIND);
@@ -434,6 +423,24 @@ public class ball_collect_alphabet : NetworkBehaviour
             else if (career == "Warr")
             {
                 CmdUseSkill(StrSHEILD);
+            }
+
+
+        }
+        if (skillAvalible[3] && (inputKey == 52) && Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            Debug.Log("atk 4");
+            if (career == "Mage")
+            {
+                CmdUseSkill(StrFLASH);
+            }
+            else if (career == "Gunn")
+            {
+                CmdUseSkill(StrGRENADE);
+            }
+            else if (career == "Warr")
+            {
+                CmdUseSkill(StrRUSH);
             }
         }
     }
@@ -593,7 +600,8 @@ public class ball_collect_alphabet : NetworkBehaviour
     {
         UIUpdateCountdown--;
         bool isChanged = collectAlphabetUpdate();
-        if (!isDead) { 
+        if (!isDead)
+        {
             if (isChanged || UIUpdateCountdown <= 0)
             {
                 UIUpdateCountdown = forceUIUpdateIntervalLength;
@@ -601,16 +609,18 @@ public class ball_collect_alphabet : NetworkBehaviour
             }
             if (isLocalPlayer)
             {
+                Debug.Log("tryskill");
                 int inputKey = 0;
-                if(Input.GetKeyDown( KeyCode.Mouse0))
-                        inputKey = 49;
-                if (Input.GetKeyDown(KeyCode.Mouse1))
-                    inputKey = 50;
                 if (Input.GetKeyDown(KeyCode.Alpha1))
-                    inputKey = 51;
+                    inputKey = 49;
                 if (Input.GetKeyDown(KeyCode.Alpha2))
+                    inputKey = 50;
+                if (Input.GetKeyDown(KeyCode.Alpha3))
+                    inputKey = 51;
+                if (Input.GetKeyDown(KeyCode.Alpha4))
                     inputKey = 52;
                 useSkill(inputKey);
+                
             }
         }
     }
