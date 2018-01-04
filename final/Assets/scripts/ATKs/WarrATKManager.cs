@@ -10,9 +10,9 @@ public class WarrATKManager : NetworkBehaviour {
 	//public Rigidbody m_Shield;
 	//public Rigidbody m_Warwing;
 	public GameObject m_SwordRitual;
-	public GameObject m_RushRitual;
+    public GameObject m_WarwingRitual;
+    public GameObject m_RushRitual;
 	public GameObject m_ShieldRitual;
-	public GameObject m_WarwingRitual;
 	public Transform m_FireFrom;
 	public Transform m_Ritual;
 	public Transform m_FireRotat;
@@ -28,10 +28,11 @@ public class WarrATKManager : NetworkBehaviour {
         //abilityList.Add(new List<string> { "S", "H", "E", "I", "L", "D" });
         //abilityList.Add(new List<string> { "W", "A", "R", "W", "I", "N", "G" });
         abilityList = new List<string>();
-        abilityList.Add("SWORD");
-        abilityList.Add("RUSH");
+
         abilityList.Add("SHEILD");
+        abilityList.Add("RUSH");
         abilityList.Add("WARWING");
+        abilityList.Add("SWORD");
         maxLength = 7;
 	}
 	

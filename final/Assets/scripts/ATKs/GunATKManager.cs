@@ -38,10 +38,11 @@ public class GunATKManager : NetworkBehaviour {
         //abilityList.Add(new List<string> { "G","R","E","N","A","D","E" });
         //abilityList.Add(new List<string> { "S","A","T","E","L","L","I","T","E" });
         abilityList = new List<string>();
-        abilityList.Add("GUN");
-        abilityList.Add("PISTOL");
-        abilityList.Add("GRENADE");
+        
         abilityList.Add("SATELLITE");
+        abilityList.Add("GRENADE");
+        abilityList.Add("PISTOL");
+        abilityList.Add("GUN");
         maxLength = 9;
 	}
 

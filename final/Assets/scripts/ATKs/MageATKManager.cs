@@ -10,11 +10,13 @@ public class MageATKManager : NetworkBehaviour
     public float m_FireSpeed;
     public GameObject m_FireRitual;
 
+    public Rigidbody m_IceShell;
+    public GameObject m_IceRitual;
+
     //public Rigidbody m_WindShell;
     public GameObject m_WindRitual;
 
-    public Rigidbody m_IceShell;
-    public GameObject m_IceRitual;
+
 
     public GameObject m_FlashHead;
     public GameObject m_FlashTail;
@@ -39,10 +41,11 @@ public class MageATKManager : NetworkBehaviour
     void Start()
     {
         abilityList = new List<string>();
-        abilityList.Add("FIRE");
+    
         abilityList.Add("WIND");
-        abilityList.Add("ICE");
         abilityList.Add("FLASH");
+        abilityList.Add("ICE");
+        abilityList.Add("FIRE");
         maxLength = 5;
     }
 
