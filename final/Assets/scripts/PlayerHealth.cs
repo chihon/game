@@ -25,6 +25,7 @@ public class PlayerHealth : NetworkBehaviour
     void Awake()
     {
         isDead = false;
+        dieHealth = 1;
         currentHealth = startingHealth;
         neocontrol = GetComponent<neocontrol>();
         ball_Collect_Alphabet = GetComponent<ball_collect_alphabet>();

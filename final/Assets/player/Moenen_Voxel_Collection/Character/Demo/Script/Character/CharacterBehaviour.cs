@@ -11,7 +11,7 @@
     [DisallowMultipleComponent]
     public class CharacterBehaviour : NetworkBehaviour
     {
-
+        private int temp;
 
 
         #region -------- DAT --------
@@ -252,7 +252,9 @@
             }
             set
             {
+
                 Ani.SetFloat("RunWalkID", value);
+            
             }
         }
 
@@ -260,17 +262,50 @@
         {
             get
             {
-                return behaviourSetting.HasHand ? (int)Ani.GetFloat("AttackID") : 1;
+                //return behaviourSetting.HasHand ? (int)Ani.GetFloat("AttackID") : 1;
+                if (SetupLocalPlayer.careers == "Mage")
+                {
+                    temp = 9;
+                    //Debug.Log("Mage = 2");
+                    return 9;
+                }
+                else if (SetupLocalPlayer.careers == "Gunn")
+                {
+                    temp = 7;
+                    return 7;
+                }
+                else
+                {
+                    temp = 3;
+                    return 3;
+                }
             }
+
             set
             {
-                Ani.SetFloat("AttackID", value);
+                if (SetupLocalPlayer.careers == "Mage")
+                {
+                    temp = 9;
+                    //Debug.Log("Mage = 2");
+                }
+                else if (SetupLocalPlayer.careers == "Gunn")
+                {
+                    temp = 7;
+                }
+                else
+                {
+                    temp = 3;
+                }
+
+                Debug.Log("temp " +temp);
+                Ani.SetFloat("AttackID", temp);
                 Ani.SetFloat("MovementID",
-                    value <= 0 ? 0 :
-                    value <= 2 ? 1 :
-                    value <= 5 ? 2 :
-                    value <= 7 ? 3 :
+                    temp <= 0 ? 0 :
+                    temp <= 2 ? 1 :
+                    temp <= 5 ? 2 :
+                    temp <= 7 ? 3 :
                 4);
+                //Debug.Log("MovementID");
             }
         }
 
@@ -282,8 +317,8 @@
             }
             set
             {
-                LogicAttackSpeed1 = Mathf.Max(value, MIN_ATTACK_LOGIC_SPEED);
-                Ani.SetFloat("AttackSpeed1", Mathf.Max(value, MIN_ATTACK_ANI_SPEED));
+                LogicAttackSpeed1 = Mathf.Max(3, MIN_ATTACK_LOGIC_SPEED);
+                Ani.SetFloat("AttackSpeed1", Mathf.Max(3, MIN_ATTACK_ANI_SPEED));
             }
         }
 
@@ -295,8 +330,8 @@
             }
             set
             {
-                LogicAttackSpeed2 = Mathf.Max(value, MIN_ATTACK_LOGIC_SPEED);
-                Ani.SetFloat("AttackSpeed2", Mathf.Max(value, MIN_ATTACK_ANI_SPEED));
+                LogicAttackSpeed2 = Mathf.Max(1, MIN_ATTACK_LOGIC_SPEED);
+                Ani.SetFloat("AttackSpeed2", Mathf.Max(1, MIN_ATTACK_ANI_SPEED));
             }
         }
 
@@ -389,16 +424,16 @@
 
         private float NextAttackTime = float.MinValue;
         private float NextDashTime = float.MinValue;
-        private float LogicAttackSpeed1 = 0.02f;
-        private float LogicAttackSpeed2 = 0.02f;
+        private float LogicAttackSpeed1 = 1f;
+        private float LogicAttackSpeed2 = 1f;
         private int CurrentJumpCount = 0;
         private int PrevAniAttackRandom = 0;
         private bool FixAniParamFlag = true;
         private Vector3 AimVelocity = Vector3.zero;
 
         private const float SAME_ATTACK_CHANCE = 0.3f;
-        private const float MIN_ATTACK_ANI_SPEED = 2.4f;
-        private const float MIN_ATTACK_LOGIC_SPEED = 0.1f;
+        private const float MIN_ATTACK_ANI_SPEED = 1f;
+        private const float MIN_ATTACK_LOGIC_SPEED = 1f;
 
 
         #endregion
@@ -919,10 +954,10 @@
 
         private void SetWeaponInfo(WeaponBehaviour id, float minD, float maxD, float speed1, float speed2, float range)
         {
-            if (behaviourSetting.HasHand)
-            {
-                AniWeaponBehaviourID = (int)id;
-            }
+            //if (behaviourSetting.HasHand)
+            //{
+            AniWeaponBehaviourID = (int)id;
+            //}
             AniAttackSpeed1 = speed1;
             AniAttackSpeed2 = speed2;
         }

@@ -17,6 +17,8 @@ public class SetupLocalPlayer : NetworkBehaviour {
 
     [SyncVar]
     public string career = "career";
+   
+    public static string careers = "career";
 
     static Color[] Colors = new Color[] { Color.magenta, Color.red, Color.cyan, Color.blue, Color.green, Color.yellow }; // from LobbyPlayer.cs
 
@@ -28,7 +30,7 @@ public class SetupLocalPlayer : NetworkBehaviour {
     private TextMesh textmesh;
     private Animator ani;
     void Start () {
-        
+        careers = career;
         if (career == "Mage")
         {
             MageModel.SetActive(true);

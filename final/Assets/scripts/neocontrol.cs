@@ -27,7 +27,8 @@ public class neocontrol : NetworkBehaviour
         CharacterController controller = GetComponent<CharacterController>();
         if (controller.isGrounded && !isDead)
         {
-
+            if ((Input.GetKey(KeyCode.Mouse0)) || (Input.GetKey(KeyCode.Mouse1)))
+                return;
             moveDirection = new Vector3(-Input.GetAxis("Horizontal"), 0, -Input.GetAxis("Vertical"));
             moveDirection = transform.TransformDirection(moveDirection);
             moveDirection *= speed;
